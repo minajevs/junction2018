@@ -1,11 +1,14 @@
 import * as ex from 'excalibur';
 import { Keys } from 'excalibur/dist/Input';
+import { WallTile } from '../wall/wallTile';
+import { globalEvents } from "../../index"
 
 const TILE = 64
 
 export class Player extends ex.Actor {
     private next: { x: number, y: number }
     private prev: { x: number, y: number }
+    private collidable = [WallTile]
 
     constructor(tx: number, ty: number) {
         super();
@@ -19,10 +22,16 @@ export class Player extends ex.Actor {
         this.collisionType = ex.CollisionType.Passive;
 
         this.on('collisionstart', (ev) => {
+            if (!this.collidable.some(collidableObject => ev.other instanceof collidableObject)) return
+
             const col = this.collides(ev.other)
             if (col === null || Math.abs(col.x) < 5 && Math.abs(col.y) < 5) return
             this.cancelMove()
         });
+
+        globalEvents.on("buttonPressed", (arg) => {
+            console.log("buttonPressed123", arg)
+        })
     }
 
     cancelMove = () => {
@@ -33,6 +42,7 @@ export class Player extends ex.Actor {
     }
 
     move = (event: ex.Input.KeyEvent) => {
+        this.setZIndex(100)
         const x = event.key === Keys.A
             ? -1
             : event.key === Keys.D

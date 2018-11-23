@@ -5,6 +5,9 @@ import { Resources } from './resources';
 import { Keys } from 'excalibur/dist/Input';
 import { createWall } from './actors/wall/wall';
 import { WallTile } from './actors/wall/wallTile';
+import { Button } from './actors/button/button';
+
+export const globalEvents = new ex.EventDispatcher({})
 
 class Game extends ex.Engine {
   constructor() {
@@ -29,6 +32,8 @@ const wall3 = createWall(3, 0, 2, 2, Resources.Block2)
 
 const wallTile1 = new WallTile(5, 5, Resources.Block1)
 
+const button = new Button(2, 2, Resources.Block3)
+
 game.input.keyboard.on('press',
   event => {
     if (event.key === Keys.Space)
@@ -51,6 +56,7 @@ wall2.forEach(x => levelOne.add(x))
 wall3.forEach(x => levelOne.add(x))
 
 levelOne.add(wallTile1);
+levelOne.add(button)
 
 game.add('levelOne', levelOne);
 
