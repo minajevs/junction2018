@@ -49,6 +49,8 @@ export class Player extends ex.Actor {
         this.next = { x: this.next.x + x * TILE, y: this.next.y + y * TILE }
 
         this.actions.clearActions()
-        this.actions.moveTo(this.next.x, this.next.y, 500)
+        const contex = this.actions.moveTo(this.next.x, this.next.y, 500).asPromise()
+
+        contex.then(_ => this.prev = { ...this.next })
     }
 }
