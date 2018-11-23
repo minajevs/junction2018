@@ -2,6 +2,7 @@ import * as ex from 'excalibur';
 import { Keys } from 'excalibur/dist/Input';
 import { WallTile } from '../wall/wallTile';
 import { globalEvents } from "../../index"
+import { Resources } from '../../resources';
 
 const TILE = 64
 
@@ -21,6 +22,10 @@ export class Player extends ex.Actor {
         this.color = new ex.Color(255, 255, 255);
         this.collisionType = ex.CollisionType.Passive;
 
+        this.addDrawing("default", Resources.Player.asSprite())
+        this.addDrawing("hidden", Resources.Empty.asSprite())
+        this.toggle(true)
+
         this.on('collisionstart', (ev) => {
             if (!this.collidable.some(collidableObject => ev.other instanceof collidableObject)) return
 
@@ -32,6 +37,10 @@ export class Player extends ex.Actor {
         globalEvents.on("buttonPressed", (arg) => {
             console.log("buttonPressed123", arg)
         })
+    }
+
+    toggle = (flag: boolean) => {
+        this.setDrawing(flag ? "default" : "hidden")
     }
 
     cancelMove = () => {
