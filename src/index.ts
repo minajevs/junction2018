@@ -3,7 +3,6 @@ import { LevelOne } from './scenes/level-one/level-one';
 import { Player } from './actors/player/player';
 import { Resources } from './resources';
 import { Keys } from 'excalibur/dist/Input';
-import { createWall } from './actors/wall/wall';
 import { WallTile } from './actors/wall/wallTile';
 import { Button } from './actors/button/button';
 
@@ -20,24 +19,21 @@ class Game extends ex.Engine {
 }
 
 const game = new Game();
-const levelOne = new LevelOne();
 
+const playerA = new Player(1, 1);
+const playerB = new Player(1, 1);
 let aActive = true
-
-const playerA = new Player(0, 0);
-const playerB = new Player(1, 0);
-const wall1 = createWall(3, 3, 4, 1, Resources.Block1)
-const wall2 = createWall(3, 3, 1, 4, Resources.Block1)
-const wall3 = createWall(3, 0, 2, 2, Resources.Block2)
-
-const wallTile1 = new WallTile(5, 5, Resources.Block1)
+let levelOne = new LevelOne(playerA, playerB)
+let level = levelOne
 
 const button = new Button(2, 2, Resources.Block3)
 
 game.input.keyboard.on('press',
   event => {
-    if (event.key === Keys.Space)
+    if (event.key === Keys.Space) {
       aActive = !aActive
+      level.switchType(aActive)
+    }
 
     if (aActive)
       playerA.move(event)
@@ -47,16 +43,6 @@ game.input.keyboard.on('press',
 
 playerA.addDrawing(Resources.Player);
 playerB.addDrawing(Resources.Player);
-
-levelOne.add(playerA);
-levelOne.add(playerB);
-
-wall1.forEach(x => levelOne.add(x))
-wall2.forEach(x => levelOne.add(x))
-wall3.forEach(x => levelOne.add(x))
-
-levelOne.add(wallTile1);
-levelOne.add(button)
 
 game.add('levelOne', levelOne);
 
