@@ -24,7 +24,6 @@ export class Level extends ex.Scene {
         this.objectB = objectsB
 
         this.on("changePlayer", _ => {
-            console.log('CHANGE')
             this.aActive = !this.aActive
             this.switchType(this.aActive)
         })

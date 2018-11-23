@@ -17,8 +17,8 @@ class Game extends ex.Engine {
 
 const game = new Game();
 
-const playerA = new Player(0, 0);
-const playerB = new Player(1, 0);
+const playerA = new Player(1, 1);
+const playerB = new Player(1, 1);
 let aActive = true
 let levelOne = new LevelOne(playerA, playerB)
 let level = levelOne
