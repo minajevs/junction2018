@@ -11,6 +11,6 @@ export class WallTile extends ex.Actor {
         this.y = 150 + ty * TILE;
         this.color = new ex.Color(255, 255, 255);
         this.addDrawing(texture)
-        console.log(tx, ty)
+        this.collisionType = ex.CollisionType.Passive;
     }
 }

@@ -40,7 +40,6 @@ game.input.keyboard.on('press',
       playerB.move(event)
   })
 
-
 playerA.addDrawing(Resources.Player);
 playerB.addDrawing(Resources.Player);
 
