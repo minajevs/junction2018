@@ -1,7 +1,6 @@
 import * as ex from 'excalibur';
 import { Keys } from 'excalibur/dist/Input';
 import { WallTile } from '../wall/wallTile';
-import { globalEvents } from "../../index"
 
 const TILE = 64
 
@@ -28,10 +27,6 @@ export class Player extends ex.Actor {
             if (col === null || Math.abs(col.x) < 5 && Math.abs(col.y) < 5) return
             this.cancelMove()
         });
-
-        globalEvents.on("buttonPressed", (arg) => {
-            console.log("buttonPressed123", arg)
-        })
     }
 
     cancelMove = () => {

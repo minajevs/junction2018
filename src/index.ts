@@ -3,8 +3,6 @@ import { LevelOne } from './scenes/level-one/level-one';
 import { Player } from './actors/player/player';
 import { Resources } from './resources';
 import { Keys } from 'excalibur/dist/Input';
-import { WallTile } from './actors/wall/wallTile';
-import { Button } from './actors/button/button';
 
 export const globalEvents = new ex.EventDispatcher({})
 
@@ -26,8 +24,6 @@ let aActive = true
 let levelOne = new LevelOne(playerA, playerB)
 let level = levelOne
 
-const button = new Button(2, 2, Resources.Block3)
-
 game.input.keyboard.on('press',
   event => {
     if (event.key === Keys.Space) {
@@ -45,7 +41,6 @@ playerA.addDrawing(Resources.Player);
 playerB.addDrawing(Resources.Player);
 
 game.add('levelOne', levelOne);
-
 
 let loader = new ex.Loader();
 for (let key in Resources) {
