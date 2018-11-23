@@ -29,6 +29,8 @@ game.input.keyboard.on('press',
     if (event.key === Keys.Space) {
       aActive = !aActive
       level.switchType(aActive)
+      playerA.toggle(aActive)
+      playerB.toggle(!aActive)
     }
 
     if (aActive)
@@ -36,9 +38,6 @@ game.input.keyboard.on('press',
     else
       playerB.move(event)
   })
-
-playerA.addDrawing(Resources.Player);
-playerB.addDrawing(Resources.Player);
 
 game.add('levelOne', levelOne);
 

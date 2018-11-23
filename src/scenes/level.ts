@@ -32,8 +32,8 @@ export class Level extends ex.Scene {
     }
 
     private clear = () => {
-        this.remove(this.playerA)
-        this.remove(this.playerB)
+        // this.remove(this.playerA)
+        // this.remove(this.playerB)
         this.objectA.forEach(x => this.remove(x))
         this.objectB.forEach(x => this.remove(x))
     }
