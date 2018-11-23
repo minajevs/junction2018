@@ -3,6 +3,8 @@ import { LevelOne } from './scenes/level-one/level-one';
 import { Player } from './actors/player/player';
 import { Resources } from './resources';
 import { Keys } from 'excalibur/dist/Input';
+import { Wall } from './actors/wall/wall';
+import { WallTile } from './actors/wall/wallTile';
 
 class Game extends ex.Engine {
   constructor() {
@@ -21,6 +23,8 @@ let aActive = true
 
 const playerA = new Player(0, 0);
 const playerB = new Player(1, 0);
+const wall1 = new Wall(3, 3, 4, 1, Resources.Block, game)
+const wallTile1 = new WallTile(5, 5, Resources.Block)
 
 game.input.keyboard.on('press',
   event => {
@@ -39,6 +43,8 @@ playerB.addDrawing(Resources.Player);
 
 levelOne.add(playerA);
 levelOne.add(playerB);
+levelOne.add(wall1);
+levelOne.add(wallTile1);
 
 game.add('levelOne', levelOne);
 
