@@ -7,7 +7,6 @@ emitter.minVel = 20;
 emitter.maxVel = 0;
 emitter.minAngle = 0;
 emitter.maxAngle = 6.2;
-emitter.isEmitting = true;
 emitter.emitRate = 5;
 emitter.opacity = 0.5;
 emitter.fadeFlag = true;
@@ -19,5 +18,6 @@ emitter.endSize = 0;
 emitter.acceleration = new ex.Vector(7, -215);
 emitter.beginColor = ex.Color.White;
 emitter.endColor = ex.Color.White;
+emitter.isEmitting = false;
 
 export default emitter
