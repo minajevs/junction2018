@@ -15,15 +15,15 @@ export class Level1 extends Level {
     public onDeactivate() { }
 
     constructor(playerA: Player, playerB: Player) {
-        const borders = createBorders(9, 9, Resources.Block2)
-        const wallA1 = createWall(2, 1, 2, 6, Resources.Block1)
-        const wallA2 = createWall(5, 1, 3, 7, Resources.Block1)
+        const borders = createBorders(9, 9, Resources.Sword)
+        const wallA1 = createWall(2, 1, 2, 6, Resources.Sword)
+        const wallA2 = createWall(5, 1, 3, 7, Resources.Sword)
 
-        const wallB1 = createWall(1, 1, 3, 7, Resources.Block1)
-        const wallB2 = createWall(5, 2, 2, 6, Resources.Block1)
+        const wallB1 = createWall(1, 1, 3, 7, Resources.Sword)
+        const wallB2 = createWall(5, 2, 2, 6, Resources.Sword)
 
-        const door = new Door(2, 4, Resources.Door, Resources.Block3)
-        const button = new Button(2, 2, Resources.Block3, [door])
+        const door = new Door(2, 4, Resources.Door, Resources.Sword)
+        // const button = new Button(2, 2, Resources.Sword, [door])
 
         const finish = new Finish(4, 4, playerA, playerB)
 

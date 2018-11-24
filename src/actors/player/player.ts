@@ -2,6 +2,8 @@ import * as ex from 'excalibur';
 import { Keys } from 'excalibur/dist/Input';
 import { WallTile } from '../wall/wallTile';
 import { Resources } from '../../resources';
+import { MagentaResources } from '../../magentaResources';
+import { CyanResources } from '../../cyanResources';
 import { Door } from '../door/door';
 import { globalEvents } from '../..';
 
@@ -13,7 +15,7 @@ export class Player extends ex.Actor {
     private collidable = [WallTile, Door]
     private moving = false
 
-    constructor(tx: number, ty: number) {
+    constructor(tx: number, ty: number, isA: boolean) {
         super();
         this.setWidth(TILE);
         this.setHeight(TILE);
@@ -23,32 +25,14 @@ export class Player extends ex.Actor {
         this.prev = { x: this.x, y: this.y }
         this.color = new ex.Color(255, 255, 255);
         this.collisionType = ex.CollisionType.Passive;
-        this.addDrawing("default", Resources.Player.asSprite())
+
+        const sprite = MagentaResources.copLeft.asSprite()
+
+        this.addDrawing("left", isA ? MagentaResources.copLeft.asSprite() : CyanResources.copLeft.asSprite())
+        this.addDrawing("right", isA ? MagentaResources.copRight.asSprite() : CyanResources.copRight.asSprite())
         this.addDrawing("hidden", Resources.Empty.asSprite())
+        this.setDrawing("left")
         this.toggle(true)
-
-        var emitter = new ex.ParticleEmitter(0, 0, 0, 0);
-emitter.emitterType = ex.EmitterType.Circle;
-emitter.radius = 6;
-emitter.minVel = 0;
-emitter.maxVel = 24;
-emitter.minAngle = 0;
-emitter.maxAngle = 2.2;
-emitter.isEmitting = true;
-emitter.emitRate = 253;
-emitter.opacity = 0.5;
-emitter.fadeFlag = true;
-emitter.particleLife = 1475;
-emitter.maxSize = 2;
-emitter.minSize = 1;
-emitter.startSize = 2;
-emitter.endSize = 4;
-emitter.acceleration = new ex.Vector(0, -80);
-emitter.beginColor = ex.Color.Cyan;
-emitter.endColor = ex.Color.Magenta;
-
-emitter.isEmitting = true
-this.add(emitter)
 
         this.on('collisionstart', (ev) => {
             if (!this.collidable.some(collidableObject => ev.other instanceof collidableObject)) return
@@ -66,7 +50,7 @@ this.add(emitter)
     }
 
     toggle = (flag: boolean) => {
-        this.setDrawing(flag ? "default" : "hidden")
+        this.setDrawing(flag ? "left" : "hidden")
     }
 
     cancelMove = () => {
@@ -99,6 +83,9 @@ this.add(emitter)
             : event.key === Keys.S
                 ? 1
                 : 0
+
+        if (x < 0) this.setDrawing('left')
+        if (x > 0) this.setDrawing('right')
 
         this.prev = { ...this.next }
         this.next = { x: this.next.x + x * TILE, y: this.next.y + y * TILE }

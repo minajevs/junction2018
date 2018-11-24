@@ -5,16 +5,18 @@ const TILE = 48
 export class Button extends ex.Actor {
     actors: ex.Actor[]
 
-    constructor(tx: number, ty: number, texture: ex.Texture, actors: ex.Actor[]) {
+    constructor(tx: number, ty: number, texture: ex.Texture, texturePressed: ex.Texture, actors: ex.Actor[]) {
         super();
         this.setWidth(TILE);
         this.setHeight(TILE);
         this.x = TILE + tx * TILE;
         this.y = TILE + ty * TILE;
         this.color = new ex.Color(255, 255, 255);
-        this.addDrawing(texture)
+        this.addDrawing('default', texture.asSprite())
+        this.addDrawing('pressed', texturePressed.asSprite())
         this.collisionType = ex.CollisionType.Passive;
         this.actors = actors
+        this.setDrawing('default')
 
         this.on('collisionstart', this.onCollisionStart)
         this.on('collisionend', this.onCollisionEnd)
@@ -30,7 +32,10 @@ export class Button extends ex.Actor {
             this.actors.forEach(actor => {
                 const toggle = (actor as any).toggle
 
-                if (typeof toggle === 'function') toggle(true)
+                if (typeof toggle === 'function') {
+                    toggle(true)
+                    this.setDrawing('pressed')
+                }
             })
         }, 10)
     }
@@ -41,7 +46,10 @@ export class Button extends ex.Actor {
             this.actors.forEach(actor => {
                 const toggle = (actor as any).toggle
 
-                if (typeof toggle === 'function') toggle(false)
+                if (typeof toggle === 'function') {
+                    toggle(false)
+                    this.setDrawing('default')
+                }
             })
         }, 10)
     }

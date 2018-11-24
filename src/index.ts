@@ -5,6 +5,8 @@ import { Resources } from './resources';
 import { Keys } from 'excalibur/dist/Input';
 import { Level1 } from './scenes/level1';
 import { Menu } from './scenes/menu';
+import { MagentaResources } from './magentaResources';
+import { CyanResources } from './cyanResources';
 
 export const globalEvents = new ex.EventDispatcher({})
 
@@ -24,8 +26,8 @@ class Game extends ex.Engine {
 const game = new Game();
 let loader = new ex.Loader();
 
-const playerA = new Player(1, 1);
-const playerB = new Player(1, 1);
+const playerA = new Player(1, 1, true);
+const playerB = new Player(1, 1, false);
 
 // scenes
 const menu = new Menu(game)
@@ -78,6 +80,12 @@ game.input.keyboard.on('press', onPressEvent)
 for (let key in Resources) {
   loader.addResource(Resources[key]);
 }
+for (let key in MagentaResources) {
+  loader.addResource(MagentaResources[key]);
+}
+for (let key in CyanResources) {
+  loader.addResource(CyanResources[key]);
+}
 
 /*
   Game Events
@@ -109,5 +117,5 @@ globalEvents.on('endMove', _ => {
   Start
 */
 game.start(loader).then(() => {
-  game.goToScene('level0');
+  game.goToScene('menu');
 });

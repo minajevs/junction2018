@@ -17,7 +17,7 @@ module.exports = ({ mode, presets } = { mode: "production", presets: [] }) => {
           test: /\.js$/,
           use: ["source-map-loader"],
           exclude: [
-            path.resolve(__dirname,'node_modules/excalibur')
+            path.resolve(__dirname, 'node_modules/excalibur')
           ],
           enforce: "pre",
         },
@@ -53,10 +53,11 @@ module.exports = ({ mode, presets } = { mode: "production", presets: [] }) => {
     plugins: [
       new CleanWebpackPlugin(['dist']),
       new HtmlWebPackPlugin({
-        title: 'Excalibur Webpack Sample'
+        title: 'Divided by spacetime',
+        template: 'src/index.html'
       })
     ]
   },
-  modeConfig(mode)
+    modeConfig(mode)
   );
 };
