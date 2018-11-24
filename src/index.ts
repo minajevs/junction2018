@@ -22,11 +22,24 @@ const game = new Game();
 const playerA = new Player(1, 1);
 const playerB = new Player(1, 1);
 let aActive = true
-let levelOne = new LevelOne(playerA, playerB)
 
-const level1 = new Level1(playerA, playerB)
+const levels = [
+  new LevelOne(playerA, playerB),
+  new Level1(playerA, playerB)
+]
 
-let level = levelOne
+let leveli = 0
+let level = levels[leveli]
+
+globalEvents.on('finishLevel', _ => {
+  leveli++
+  level = levels[leveli]
+  game.goToScene(`level${leveli}`)
+  aActive = true
+  level.switchType(aActive)
+  playerA.toggle(aActive)
+  playerB.toggle(!aActive)
+})
 
 game.input.keyboard.on('press',
   event => {
@@ -43,8 +56,7 @@ game.input.keyboard.on('press',
       playerB.move(event)
   })
 
-game.add('levelOne', levelOne);
-// game.add('level1', level1);
+levels.forEach((level, i) => game.add(`level${i}`, level))
 
 let loader = new ex.Loader();
 for (let key in Resources) {
@@ -52,5 +64,5 @@ for (let key in Resources) {
 }
 
 game.start(loader).then(() => {
-  game.goToScene('levelOne');
+  game.goToScene('level0');
 });
