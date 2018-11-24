@@ -14,6 +14,7 @@ import { background } from "../particles"
 import { Sobaka } from '../actors/sobaka/sobaka';
 import { Vector } from 'excalibur';
 import { ScoreTime } from '../actors/timer';
+import { Game } from '..';
 
 const {
   leftTop: mlt,
@@ -94,13 +95,13 @@ export class LevelTwo extends Level {
   public onActivate() {
     const offsetx = this.engine.getWorldBounds().right / 2 + 24 - mapA[0].length / 2 * 48
     this.setPlayers(offsetx, 6, 4, 1, 5)
-
+    this.game.controlsActive = true
     //this.zhuchka.setPos(offsetx, 5, 1, new Vector(10, 2))
     //this.suchka.setPos(offsetx, 1, 5, new Vector(1, 10))
   }
-  public onDeactivate() { }
+  public onDeactivate() { this.game.controlsActive = false }
 
-  constructor(playerA: Player, playerB: Player, engine: ex.Engine, timer: ex.Label) {
+  constructor(playerA: Player, playerB: Player, engine: Game, timer: ex.Label) {
     const offsetx = engine.getWorldBounds().right / 2 + 24 - mapA[0].length / 2 * 48
     const mapATiles = createWalls(offsetx, mapA, true)
     const mapBTiles = createWalls(offsetx, mapB, false)
@@ -143,8 +144,8 @@ export class LevelTwo extends Level {
     // zhuchka.guljatj(new Vector(10, 2), 100)
     // suchka.guljatj(new Vector(2, 10), 100)
 
-    const objectsA = [...mapATiles, ...buttonsA, ...flatten(doorsB), /*zhuchka*/, finish]
-    const objectsB = [...mapBTiles, ...buttonsB, ...flatten(doorsA), /*suchka*/, finish]
+    const objectsA = [timer, ...mapATiles, ...buttonsA, ...flatten(doorsB), /*zhuchka*/, finish]
+    const objectsB = [timer, ...mapBTiles, ...buttonsB, ...flatten(doorsA), /*suchka*/, finish]
 
     super(playerA, playerB, objectsA, objectsB, engine)
 

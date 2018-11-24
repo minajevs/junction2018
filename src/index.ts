@@ -12,7 +12,9 @@ import { ScoreTime, createTimer } from './actors/timer';
 
 export const globalEvents = new ex.EventDispatcher({})
 
-class Game extends ex.Engine {
+export class Game extends ex.Engine {
+  controlsActive: boolean = false
+
   constructor() {
     super({
       width: 800,
@@ -65,10 +67,13 @@ game.input.pointers.primary.on("down", () => {
   // Mouse click
   game.input.pointers.primary.off("down");
   //timer.setTime(0)
+  timer.setTime(0)
   game.goToScene('level0');
 });
 
 const onHoldEvent = (event: ex.Input.KeyEvent) => {
+  if (!game.controlsActive) return
+
   if (aActive)
     playerA.move(event)
   else
@@ -76,6 +81,8 @@ const onHoldEvent = (event: ex.Input.KeyEvent) => {
 }
 
 const onPressEvent = (event: ex.Input.KeyEvent) => {
+  if (!game.controlsActive) return
+
   if (event.key === Keys.Space) {
     aActive = !aActive
     level.switchType(aActive)

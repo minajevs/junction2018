@@ -3,7 +3,7 @@ import { Player } from '../actors/player/player';
 import { createWall } from '../actors/wall/wall';
 import { Resources } from '../resources';
 import { createBg } from './createbg';
-import { globalEvents } from '..';
+import { globalEvents, Game } from '..';
 import { Sobaka } from '../actors/sobaka/sobaka';
 import { ScoreTime } from '../actors/timer';
 
@@ -25,13 +25,15 @@ export class Level extends ex.Scene {
 
     playerA: Player
     playerB: Player
+    game: Game
 
     private objectA: ex.Actor[]
     private objectB: ex.Actor[]
 
-    constructor(playerA: Player, playerB: Player, objectsA: ex.Actor[], objectsB: ex.Actor[], engine: ex.Engine) {
+    constructor(playerA: Player, playerB: Player, objectsA: ex.Actor[], objectsB: ex.Actor[], engine: Game) {
         super()
         this.engine = engine
+        this.game = engine
         this.playerA = playerA
         this.playerB = playerB
         this.objectA = objectsA
