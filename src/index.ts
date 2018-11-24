@@ -17,6 +17,7 @@ class Game extends ex.Engine {
       height: 600,
       displayMode: ex.DisplayMode.FullScreen,
       backgroundColor: ex.Color.fromRGB(0, 0, 0, 0),
+      canvasElementId: "game"
     });
   }
 
