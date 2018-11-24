@@ -20,6 +20,7 @@ export class Sobaka extends ex.Actor {
     direction = true
     interval: NodeJS.Timer
     isA: boolean
+    hidden: boolean
 
     constructor(tx: number, ty: number, isA: boolean) {
         super();
@@ -42,7 +43,7 @@ export class Sobaka extends ex.Actor {
         this.on('collisionstart', (ev) => {
             if (ev.other instanceof Door && (ev.other as Door).opened) return
 
-            if (ev.other instanceof Player)
+            if (ev.other instanceof Player && ev.other.isA === isA)
                 console.log('NJAM NJAM')
         });
 
@@ -54,13 +55,28 @@ export class Sobaka extends ex.Actor {
     }
 
     guljatj = (to: ex.Vector, speed: number) => {
+        const deltax = this.x - to.x
+        console.log(deltax)
+
         this.actions
+            .callMethod(() => {
+                if (this.hidden) return
+
+                if (deltax < 0) this.setDrawing('left')
+                if (deltax > 0) this.setDrawing('right')
+            })
             .moveTo(
                 to.x * TILE,
                 to.y * TILE,
                 speed
             )
             .delay(10)
+            .callMethod(() => {
+                if (this.hidden) return
+
+                if (deltax < 0) this.setDrawing('right')
+                if (deltax > 0) this.setDrawing('left')
+            })
             .moveTo(
                 this.prev.x,
                 this.prev.y,
@@ -70,6 +86,7 @@ export class Sobaka extends ex.Actor {
     }
 
     toggle = (flag: boolean) => {
+        this.hidden = !flag
         this.setDrawing(flag ? "left" : "hidden")
     }
 

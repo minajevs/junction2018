@@ -15,6 +15,7 @@ export class Player extends ex.Actor {
     private prev: ex.Vector
     private target: ex.Vector
     private collidable = [WallTile, Door]
+    isA: boolean
 
     constructor(tx: number, ty: number, isA: boolean) {
         super();
@@ -28,6 +29,7 @@ export class Player extends ex.Actor {
         this.color = new ex.Color(255, 255, 255);
         this.collisionType = ex.CollisionType.Passive;
 
+        this.isA = isA
         const sprite = MagentaResources.copLeft.asSprite()
 
         this.addDrawing("left", isA ? MagentaResources.copLeft.asSprite() : CyanResources.copLeft.asSprite())
