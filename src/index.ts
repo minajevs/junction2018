@@ -12,7 +12,12 @@ export const globalEvents = new ex.EventDispatcher({})
 
 class Game extends ex.Engine {
   constructor() {
-    super({ width: 800, height: 600, displayMode: ex.DisplayMode.FullScreen, backgroundColor: ex.Color.fromHex('#000000') });
+    super({
+      width: 800,
+      height: 600,
+      displayMode: ex.DisplayMode.FullScreen,
+      backgroundColor: ex.Color.fromRGB(0, 0, 0, 0),
+    });
   }
 
   public start(loader: ex.Loader) {
@@ -33,8 +38,8 @@ const playerB = new Player(1, 1, false);
 const menu = new Menu(game)
 
 const levels = [
-  new LevelOne(playerA, playerB),
-  new Level1(playerA, playerB)
+  new LevelOne(playerA, playerB, game),
+  new Level1(playerA, playerB, game)
 ]
 
 // vars

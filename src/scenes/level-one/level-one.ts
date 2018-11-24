@@ -99,7 +99,7 @@ export class LevelOne extends Level {
   }
   public onDeactivate() { }
 
-  constructor(playerA: Player, playerB: Player) {
+  constructor(playerA: Player, playerB: Player, engine: ex.Engine) {
     const mapATiles = createWalls(mapA)
     const mapBTiles = createWalls(mapB)
 
@@ -119,7 +119,7 @@ export class LevelOne extends Level {
     const objectsA = [...mapATiles, ...buttons, finish]
     const objectsB = [...mapBTiles, ...flatten(doors), finish]
 
-    super(playerA, playerB, objectsA, objectsB)
+    super(playerA, playerB, objectsA, objectsB, engine)
     this.add(background)
   }
 }

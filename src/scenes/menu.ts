@@ -7,6 +7,7 @@ import { Button } from "../actors/button/button"
 import { Door } from "../actors/door/door"
 import { Finish } from '../actors/finish/finish';
 import { Label, Vector } from 'excalibur';
+import { createBg } from './createbg';
 
 export class Menu extends ex.Scene {
     public onInitialize(engine: ex.Engine) { }
@@ -51,7 +52,7 @@ export class Menu extends ex.Scene {
         csprite.scale = new Vector(0.5, 0.5)
         controls.addDrawing(csprite)
 
-
+        this.add(createBg(engine))
         this.add(label)
         this.add(copyright)
         this.add(controls)
