@@ -14,6 +14,7 @@ import { background } from "../particles"
 import { Sobaka } from '../actors/sobaka/sobaka';
 import { Vector } from 'excalibur';
 import { ScoreTime } from '../actors/timer';
+import { Game } from '..';
 
 const {
   leftTop: mlt,
@@ -88,10 +89,12 @@ export class LevelOne extends Level {
   public onActivate() {
     const offsetx = this.engine.getWorldBounds().right / 2 + 24 - mapA[0].length / 2 * 48
     this.setPlayers(offsetx, 1, 7, 8, 7)
+    console.log(this)
+    this.game.controlsActive = true
   }
-  public onDeactivate() { }
+  public onDeactivate() { this.game.controlsActive = false }
 
-  constructor(playerA: Player, playerB: Player, engine: ex.Engine, timer: ex.Label) {
+  constructor(playerA: Player, playerB: Player, engine: Game, timer: ex.Label) {
     const offsetx = engine.getWorldBounds().right / 2 + 24 - mapA[0].length / 2 * 48
     const mapATiles = createWalls(offsetx, mapA)
     const mapBTiles = createWalls(offsetx, mapB)

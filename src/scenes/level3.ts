@@ -14,6 +14,7 @@ import { background } from "../particles"
 import { Sobaka } from '../actors/sobaka/sobaka';
 import { Vector } from 'excalibur';
 import { ScoreTime } from '../actors/timer';
+import { Game } from '..';
 
 const {
   leftTop: mlt,
@@ -101,16 +102,16 @@ export class LevelThree extends Level {
   public onActivate() {
     const offsetx = this.engine.getWorldBounds().right / 2 + 24 - mapA[0].length / 2 * 48
     this.setPlayers(offsetx, 4, 10, 4, 4)
-
+    this.game.controlsActive = true
     this.dog1.setPos(offsetx, 4, 12, new Vector(9, 12))
     this.dog2.setPos(offsetx, 1, 1, new Vector(10, 1))
     this.dog3.setPos(offsetx, 10, 5, new Vector(12, 5))
     this.dog3.setPos(offsetx, 10, 7, new Vector(12, 7))
     this.dog3.setPos(offsetx, 10, 9, new Vector(12, 9))
   }
-  public onDeactivate() { }
+  public onDeactivate() { this.game.controlsActive = false }
 
-  constructor(playerA: Player, playerB: Player, engine: ex.Engine, timer: ex.Label) {
+  constructor(playerA: Player, playerB: Player, engine: Game, timer: ex.Label) {
     const offsetx = engine.getWorldBounds().right / 2 + 24 - mapA[0].length / 2 * 48
     const mapATiles = createWalls(offsetx, mapA)
     const mapBTiles = createWalls(offsetx, mapB)
