@@ -9,8 +9,25 @@ export type coords = {
   y: number
 }
 
-export const createButtonDoors = (buttonCoords: coords, doorsCoords: coords[], isA: boolean) => {
-  const doors = doorsCoords.map(coords => new Door(coords.x, coords.y, Resources.Door, Resources.Sword))
+export const createButtonDoors = (buttonCoords: coords, doorsCoords: coords, horizontal: boolean, isA: boolean) => {
+  const doors = [doorsCoords].map(coords => new Door(
+    coords.x,
+    coords.y,
+    horizontal
+      ? !isA
+        ? MagentaResources.doorHorizontalClosed
+        : CyanResources.doorHorizontalClosed
+      : !isA
+        ? MagentaResources.doorVerticalClosed
+        : CyanResources.doorVerticalClosed,
+    horizontal
+      ? !isA
+        ? MagentaResources.doorHorizontalOpen
+        : CyanResources.doorHorizontalOpen
+      : !isA
+        ? MagentaResources.doorHorizontalOpen
+        : CyanResources.doorHorizontalOpen,
+  ))
   const button = new Button(
     buttonCoords.x,
     buttonCoords.y,

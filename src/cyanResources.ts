@@ -25,12 +25,23 @@ const tLeft = require('./images-retrowave/cyan/wall16.png');
 const btn = require('./images-retrowave/cyan/button.png');
 const btnPressed = require('./images-retrowave/cyan/button_pressed.png');
 
+const dhc = require('./images-retrowave/cyan/door_3.png');
+const dho = require('./images-retrowave/cyan/door_3_4_opened.png');
+
+const dvc = require('./images-retrowave/cyan/door2.png');
+const dvo = require('./images-retrowave/cyan/door1_2_opened.png');
+
 let CyanResources = {
     copLeft: new ex.Texture(copLeft),
     copRight: new ex.Texture(copRight),
 
     btn: new ex.Texture(btn),
     btnPressed: new ex.Texture(btnPressed),
+
+    doorHorizontalClosed: new ex.Texture(dhc),
+    doorHorizontalOpen: new ex.Texture(dho),
+    doorVerticalClosed: new ex.Texture(dvc),
+    doorVerticalOpen: new ex.Texture(dvo),
 
     leftTop: new ex.Texture(leftTop),
     leftBottom: new ex.Texture(leftBottom),

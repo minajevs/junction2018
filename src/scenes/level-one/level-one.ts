@@ -78,7 +78,7 @@ const mapB = [
   [ctb, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ctb],
   [ctb, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ctb],
   [ctb, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ctb],
-  [ctb, ' ', ' ', ' ', ' ', clt, crt, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ctb],
+  [ctb, ' ', ' ', ' ', ' ', clt, clr, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ctb],
   [ctb, ' ', ' ', ' ', ' ', ctr, ctl, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ctb],
   [ctb, ' ', ' ', ' ', ' ', ctb, ctb, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ctb],
   [ctb, ' ', ' ', ' ', ' ', ctb, ctb, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ctb],
@@ -110,7 +110,7 @@ export class LevelOne extends Level {
       }
     ]
 
-    const buttonsDoors = buttonsDoorsCoords.map(buttonsDoorsCoord => createButtonDoors(buttonsDoorsCoord.button, buttonsDoorsCoord.doors, true))
+    const buttonsDoors = buttonsDoorsCoords.map(buttonsDoorsCoord => createButtonDoors(buttonsDoorsCoord.button, buttonsDoorsCoord.doors[0], true, true))
     const buttons = buttonsDoors.map(item => item.button)
     const doors = buttonsDoors.map(item => item.doors)
 
