@@ -100,7 +100,7 @@ export class LevelOne extends Level {
   }
   public onDeactivate() { }
 
-  constructor(playerA: Player, playerB: Player, engine: ex.Engine, timer: ScoreTime) {
+  constructor(playerA: Player, playerB: Player, engine: ex.Engine, timer: ex.Label) {
     const offsetx = engine.getWorldBounds().right / 2 + 24 - mapA[0].length / 2 * 48
     const mapATiles = createWalls(offsetx, mapA)
     const mapBTiles = createWalls(offsetx, mapB)
@@ -146,7 +146,7 @@ export class LevelOne extends Level {
     const objectsA = [...mapATiles, ...buttonsA, ...flatten(doorsB), /*zhuchka*/, finish]
     const objectsB = [...mapBTiles, ...buttonsB, ...flatten(doorsA), /*suchka*/, finish]
 
-    super(playerA, playerB, objectsA, objectsB, engine, timer)
+    super(playerA, playerB, objectsA, objectsB, engine)
 
     this.add(background)
 

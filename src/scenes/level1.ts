@@ -16,7 +16,7 @@ export class Level1 extends Level {
     }
     public onDeactivate() { }
 
-    constructor(playerA: Player, playerB: Player, engine: ex.Engine, time: ScoreTime) {
+    constructor(playerA: Player, playerB: Player, engine: ex.Engine, time: ex.Label) {
         const borders = createBorders(0, 9, 9, Resources.Sword)
         const wallA1 = createWall(2, 1, 2, 6, Resources.Sword)
         const wallA2 = createWall(5, 1, 3, 7, Resources.Sword)
@@ -29,9 +29,9 @@ export class Level1 extends Level {
 
         const finish = new Finish(0, 4, 4, playerA, playerB)
 
-        const objectsA = [...wallA1, ...wallA2, ...borders, finish]
-        const objectsB = [...wallB1, ...wallB2, ...borders, finish]
+        const objectsA = [...wallA1, ...wallA2, ...borders, time, finish]
+        const objectsB = [...wallB1, ...wallB2, ...borders, time, finish]
 
-        super(playerA, playerB, objectsA, objectsB, engine, time)
+        super(playerA, playerB, objectsA, objectsB, engine)
     }
 }

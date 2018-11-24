@@ -2,22 +2,31 @@ import * as ex from 'excalibur';
 
 const TILE = 48
 
+export const createTimer = () => {
+    let time = 0
+    const label = new ex.Label(time.toString(), 100, 100)
+    label.fontFamily = "'Press Start 2P'"
+    label.color = ex.Color.White
+    label.textAlign = ex.TextAlign.Right
+
+    setInterval(_ => {
+        time++
+        label.text = time.toString()
+    }, 1000)
+
+    return label
+}
+
 export class ScoreTime extends ex.Actor {
     time: number
     label: ex.Label
     constructor(engine: ex.Engine) {
         super()
-        this.setWidth(80)
-        this.setHeight(80)
-        this.x = engine.getWorldBounds().right / 2
-        this.y = engine.getWorldBounds().top / 2
-
-        const label = new ex.Label('0')
+        const label = new ex.Label('0', 100, 100)
 
         label.fontFamily = "'Press Start 2P'"
-        label.fontSize = 20
+        label.fontSize = 30
         label.color = ex.Color.White
-        label.textAlign = ex.TextAlign.Right
 
         this.label = label
 

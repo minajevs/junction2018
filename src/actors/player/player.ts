@@ -43,7 +43,7 @@ export class Player extends ex.Actor {
             if (ev.other instanceof Door && (ev.other as Door).opened) return
 
             const col = this.collides(ev.other)
-            if (col === null || Math.abs(col.x) < 5 && Math.abs(col.y) < 5) return
+            if (col === null || Math.abs(col.x) < 7 && Math.abs(col.y) < 7) return
             this.cancelMove()
         });
     }

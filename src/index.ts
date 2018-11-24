@@ -8,7 +8,7 @@ import { Level1 } from './scenes/level1';
 import { Menu } from './scenes/menu';
 import { MagentaResources } from './magentaResources';
 import { CyanResources } from './cyanResources';
-import { ScoreTime } from './actors/timer';
+import { ScoreTime, createTimer } from './actors/timer';
 
 export const globalEvents = new ex.EventDispatcher({})
 
@@ -33,7 +33,7 @@ class Game extends ex.Engine {
 */
 const game = new Game();
 let loader = new ex.Loader();
-const timer = new ScoreTime(game)
+const timer = createTimer()
 
 const playerA = new Player(1, 1, true);
 const playerB = new Player(1, 1, false);

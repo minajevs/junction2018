@@ -29,14 +29,13 @@ export class Level extends ex.Scene {
     private objectA: ex.Actor[]
     private objectB: ex.Actor[]
 
-    constructor(playerA: Player, playerB: Player, objectsA: ex.Actor[], objectsB: ex.Actor[], engine: ex.Engine, timer: ScoreTime) {
+    constructor(playerA: Player, playerB: Player, objectsA: ex.Actor[], objectsB: ex.Actor[], engine: ex.Engine) {
         super()
         this.engine = engine
         this.playerA = playerA
         this.playerB = playerB
         this.objectA = objectsA
         this.objectB = objectsB
-        this.add(timer)
         this.add(createBg(engine))
     }
 

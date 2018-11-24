@@ -103,7 +103,7 @@ export class LevelTwo extends Level {
   }
   public onDeactivate() { }
 
-  constructor(playerA: Player, playerB: Player, engine: ex.Engine, timer: ScoreTime) {
+  constructor(playerA: Player, playerB: Player, engine: ex.Engine, timer: ex.Label) {
     const offsetx = engine.getWorldBounds().right / 2 + 24 - mapA[0].length / 2 * 48
     const mapATiles = createWalls(offsetx, mapA)
     const mapBTiles = createWalls(offsetx, mapB)
@@ -175,14 +175,15 @@ export class LevelTwo extends Level {
     const finish = new Finish(offsetx, 12, 12, playerA, playerB)
 
     const dog1 = new Sobaka(offsetx, 4, 12, true)
-    dog1.guljatj(new Vector(9, 12), 100)
+    dog1.guljatj(new Vector(9, 13), 100)
+
     // const suchka = new Sobaka(1, 5, false)
 
     // suchka.guljatj(new Vector(2, 10), 100)
-    const objectsA = [...mapATiles, ...buttonsAVertical, ...buttonsAHorizontal, ...flatten(doorsBHorizontal), ...flatten(doorsBVertical), dog1, finish]
-    const objectsB = [...mapBTiles, ...buttonsBHorizontal, ...buttonsBVertical, ...flatten(doorsAVertical), ...flatten(doorsAHorizontal), /*suchka*/, finish]
+    const objectsA = [timer, ...mapATiles, ...buttonsAVertical, ...buttonsAHorizontal, ...flatten(doorsBHorizontal), ...flatten(doorsBVertical), dog1, finish]
+    const objectsB = [timer, ...mapBTiles, ...buttonsBHorizontal, ...buttonsBVertical, ...flatten(doorsAVertical), ...flatten(doorsAHorizontal), /*suchka*/, finish]
 
-    super(playerA, playerB, objectsA, objectsB, engine, timer)
+    super(playerA, playerB, objectsA, objectsB, engine)
 
     this.add(background)
 
