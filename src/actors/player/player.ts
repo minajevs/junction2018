@@ -37,7 +37,6 @@ export class Player extends ex.Actor {
         this.add(!isA ? player1particle : player2particle)
 
         this.on('collisionstart', (ev) => {
-            console.log("colldsadsd")
             if (!this.collidable.some(collidableObject => ev.other instanceof collidableObject)) return
             if (ev.other instanceof Door && (ev.other as Door).opened) return
 
@@ -58,14 +57,13 @@ export class Player extends ex.Actor {
 
     cancelMove = () => {
         this.actions.clearActions()
-        // this.x = this.prev.x
-        // this.y = this.prev.y
-        // this.next = { ...this.prev }
+        this.x = this.prev.x
+        this.y = this.prev.y
+        this.next = { ...this.prev }
         this.endMove()
     }
 
     setPos = (x: number, y: number) => {
-        console.log(x, y)
         this.x = TILE + x * TILE;
         this.y = TILE + y * TILE;
         this.next = { x: this.x, y: this.y }
@@ -74,8 +72,8 @@ export class Player extends ex.Actor {
 
     move = (event: ex.Input.KeyEvent) => {
         if (this.moving) return
-        // this.moving = true
-        // this.setZIndex(1000)
+        this.moving = true
+        this.setZIndex(1000)
         const x = event.key === Keys.A
             ? -1
             : event.key === Keys.D
@@ -91,18 +89,14 @@ export class Player extends ex.Actor {
         if (x < 0) this.setDrawing('left')
         if (x > 0) this.setDrawing('right')
 
-        this.x = this.x + x * TILE
-        this.y = this.y + y * TILE
-        // this.prev = { ...this.next }
-        // this.next = { x: this.next.x + x * TILE, y: this.next.y + y * TILE }
+        this.prev = { ...this.next }
+        this.next = { x: this.next.x + x * TILE, y: this.next.y + y * TILE }
 
-        // const contex = this.actions.moveTo(this.next.x, this.next.y, 48 * 100).asPromise()
+        const contex = this.actions.moveTo(this.next.x, this.next.y, 500).asPromise()
 
-        // contex.then(_ => {
-        //     console.log("move")
-
-        //     this.prev = { ...this.next }
-        //     this.endMove()
-        // })
+        contex.then(_ => {
+            this.prev = { ...this.next }
+            this.endMove()
+        })
     }
 }
