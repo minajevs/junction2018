@@ -6,6 +6,8 @@ import { Resources } from '../../resources';
 import { Button } from "../../actors/button/button"
 import { Door } from "../../actors/door/door"
 import { Finish } from '../../actors/finish/finish';
+import { createButtonDoors, coords } from "../../createButtonDoors"
+import { flatten } from "lodash"
 
 export class LevelOne extends Level {
   public onInitialize(engine: ex.Engine) { }
@@ -18,12 +20,20 @@ export class LevelOne extends Level {
     const wall2 = createWall(3, 3, 1, 4, Resources.Block1)
     const wall3 = createWall(3, 0, 2, 2, Resources.Block2)
 
-    const door = new Door(2, 4, Resources.Door, Resources.Block3)
-    const button = new Button(2, 2, Resources.Block3, [door])
+    const buttonsDoorsCoords = [
+      {
+        button: { x: 2, y: 2 },
+        doors: [{ x: 7, y: 4 }, { x: 6, y: 6 }]
+      }
+    ]
+
+    const buttonsDoors = buttonsDoorsCoords.map(buttonsDoorsCoord => createButtonDoors(buttonsDoorsCoord.button, buttonsDoorsCoord.doors))
+    const buttons = buttonsDoors.map(item => item.button)
+    const doors = buttonsDoors.map(item => item.doors)
 
     const finish = new Finish(4, 4, playerA, playerB)
 
-    const objectsA = [...wall1, ...wall2, ...borders, button, door, finish]
+    const objectsA = [...wall1, ...wall2, ...borders, ...buttons, ...flatten(doors), finish]
     const objectsB = [...wall3, ...borders, finish]
 
     super(playerA, playerB, objectsA, objectsB)
