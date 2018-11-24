@@ -35,7 +35,8 @@ export const createButtonDoors = (startpos: number, buttonCoords: coords, doorsC
     buttonCoords.y,
     isA ? MagentaResources.btn : CyanResources.btn,
     isA ? MagentaResources.btnPressed : CyanResources.btnPressed,
-    doors)
+    doors,
+    isA)
 
   return { doors, button }
 }
