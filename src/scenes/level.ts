@@ -27,6 +27,8 @@ export class Level extends ex.Scene {
     setPlayers = (xa: number, ya: number, xb: number, yb: number) => {
         this.playerA.setPos(xa, ya)
         this.playerB.setPos(xb, yb)
+        this.playerA.cancelMove()
+        this.playerB.cancelMove()
 
         this.on("changePlayer", _ => {
             this.aActive = !this.aActive

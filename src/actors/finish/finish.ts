@@ -5,7 +5,7 @@ import { globalEvents } from "../../index"
 import { Player } from '../player/player';
 import { Resources } from '../../resources';
 
-const TILE = 64
+const TILE = 48
 
 export class Finish extends ex.Actor {
     private playerA: Player
@@ -34,7 +34,7 @@ export class Finish extends ex.Actor {
             console.log(this.collides(this.playerB), "B")
 
             if (this.collides(this.playerA) && this.collides(this.playerB)) {
-                console.log('YAY')
+                globalEvents.emit('finishLevel')
             }
         });
     }

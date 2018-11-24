@@ -4,12 +4,13 @@ import { WallTile } from '../wall/wallTile';
 import { Resources } from '../../resources';
 import { Door } from '../door/door';
 
-const TILE = 64
+const TILE = 48
 
 export class Player extends ex.Actor {
     private next: { x: number, y: number }
     private prev: { x: number, y: number }
     private collidable = [WallTile, Door]
+    private moving = false
 
     constructor(tx: number, ty: number) {
         super();
@@ -21,7 +22,6 @@ export class Player extends ex.Actor {
         this.prev = { x: this.x, y: this.y }
         this.color = new ex.Color(255, 255, 255);
         this.collisionType = ex.CollisionType.Passive;
-
         this.addDrawing("default", Resources.Player.asSprite())
         this.addDrawing("hidden", Resources.Empty.asSprite())
         this.toggle(true)
@@ -45,6 +45,7 @@ export class Player extends ex.Actor {
         this.x = this.prev.x
         this.y = this.prev.y
         this.next = { ...this.prev }
+        this.moving = false
     }
 
     setPos = (x: number, y: number) => {
@@ -55,6 +56,8 @@ export class Player extends ex.Actor {
     }
 
     move = (event: ex.Input.KeyEvent) => {
+        if (this.moving) return
+        this.moving = true
         this.setZIndex(1000)
         const x = event.key === Keys.A
             ? -1
@@ -71,11 +74,11 @@ export class Player extends ex.Actor {
         this.prev = { ...this.next }
         this.next = { x: this.next.x + x * TILE, y: this.next.y + y * TILE }
 
-        this.actions.clearActions()
         const contex = this.actions.moveTo(this.next.x, this.next.y, 500).asPromise()
 
         contex.then(_ => {
             this.prev = { ...this.next }
+            this.moving = false
         })
     }
 }

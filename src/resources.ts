@@ -1,12 +1,12 @@
 import * as ex from 'excalibur';
-const sword = require('./images/sword.png');
-const player = require('./images/Player/player_05.png');
-const empty = require('./images/empty.png');
-const block = require('./images/Blocks/block_01.png');
-const block2 = require('./images/Blocks/block_02.png');
-const block3 = require('./images/Blocks/block_07.png');
-const door = require('./images/Blocks/block_06.png');
-const finish = require('./images/Environment/environment_03.png');
+const sword = require('./images32/sword.png');
+const player = require('./images32/player_05.png');
+const empty = require('./images32/empty.png');
+const block = require('./images32/block_01.png');
+const block2 = require('./images32/block_02.png');
+const block3 = require('./images32/block_07.png');
+const door = require('./images32/block_06.png');
+const finish = require('./images32/environment_03.png');
 
 let Resources = {
     Sword: new ex.Texture(sword),

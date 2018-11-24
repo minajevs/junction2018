@@ -1,6 +1,6 @@
 import * as ex from 'excalibur';
 
-const TILE = 64
+const TILE = 48
 
 export class Door extends ex.Actor {
   opened: boolean = false

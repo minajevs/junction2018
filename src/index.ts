@@ -31,10 +31,15 @@ const levels = [
 let leveli = 0
 let level = levels[leveli]
 
+globalEvents.on('startGame', _ => {
+  game.goToScene('level0');
+})
+
 globalEvents.on('finishLevel', _ => {
   leveli++
   level = levels[leveli]
   game.goToScene(`level${leveli}`)
+  level.onActivate()
   aActive = true
   level.switchType(aActive)
   playerA.toggle(aActive)
@@ -64,5 +69,5 @@ for (let key in Resources) {
 }
 
 game.start(loader).then(() => {
-  game.goToScene('level0');
+  game.goToScene('menu');
 });

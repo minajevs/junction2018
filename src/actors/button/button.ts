@@ -1,6 +1,6 @@
 import * as ex from 'excalibur';
 
-const TILE = 64
+const TILE = 48
 
 export class Button extends ex.Actor {
     actors: ex.Actor[]
