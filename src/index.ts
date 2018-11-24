@@ -3,6 +3,7 @@ import { LevelOne } from './scenes/level-one/level-one';
 import { Player } from './actors/player/player';
 import { Resources } from './resources';
 import { Keys } from 'excalibur/dist/Input';
+import { Level1 } from './scenes/level1';
 
 export const globalEvents = new ex.EventDispatcher({})
 
@@ -22,7 +23,10 @@ const playerA = new Player(1, 1);
 const playerB = new Player(1, 1);
 let aActive = true
 let levelOne = new LevelOne(playerA, playerB)
-let level = levelOne
+
+const level1 = new Level1(playerA, playerB)
+
+let level = level1
 
 game.input.keyboard.on('press',
   event => {
@@ -40,6 +44,7 @@ game.input.keyboard.on('press',
   })
 
 game.add('levelOne', levelOne);
+game.add('level1', level1);
 
 let loader = new ex.Loader();
 for (let key in Resources) {
@@ -47,5 +52,5 @@ for (let key in Resources) {
 }
 
 game.start(loader).then(() => {
-  game.goToScene('levelOne');
+  game.goToScene('level1');
 });

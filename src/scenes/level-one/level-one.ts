@@ -13,7 +13,7 @@ export class LevelOne extends Level {
   public onDeactivate() { }
 
   constructor(playerA: Player, playerB: Player) {
-    const borders = createBorders(10, 8, Resources.Block2)
+    const borders = createBorders(15, 9, Resources.Block2)
     const wall1 = createWall(3, 3, 4, 1, Resources.Block1)
     const wall2 = createWall(3, 3, 1, 4, Resources.Block1)
     const wall3 = createWall(3, 0, 2, 2, Resources.Block2)

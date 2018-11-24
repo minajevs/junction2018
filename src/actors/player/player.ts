@@ -14,8 +14,8 @@ export class Player extends ex.Actor {
         super();
         this.setWidth(TILE);
         this.setHeight(TILE);
-        this.x = 150 + tx * TILE;
-        this.y = 150 + ty * TILE;
+        this.x = TILE + tx * TILE;
+        this.y = TILE + ty * TILE;
         this.next = { x: this.x, y: this.y }
         this.prev = { x: this.x, y: this.y }
         this.color = new ex.Color(255, 255, 255);
@@ -43,6 +43,13 @@ export class Player extends ex.Actor {
         this.x = this.prev.x
         this.y = this.prev.y
         this.next = { ...this.prev }
+    }
+
+    setPos = (x: number, y: number) => {
+        this.x = TILE + x * TILE;
+        this.y = TILE + y * TILE;
+        this.next = { x: this.x, y: this.y }
+        this.prev = { x: this.x, y: this.y }
     }
 
     move = (event: ex.Input.KeyEvent) => {

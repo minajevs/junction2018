@@ -14,11 +14,11 @@ export const createWall = (x: number, y: number, w: number, h: number, texture: 
 
 export const createBorders = (sidex: number, sidey: number, texture: ex.Texture): WallTile[] => {
     let tiles = []
-    const leftWall = createWall(0, 0, 1, sidey, texture)
-    const topWall = createWall(1, 0, sidex, 1, texture)
+    const leftWall = createWall(0, 0, 1, sidey - 1, texture)
+    const topWall = createWall(1, 0, sidex - 1, 1, texture)
 
-    const rightWall = createWall(sidex, 1, 1, sidey, texture)
-    const bottomWall = createWall(0, sidey, sidex, 1, texture)
+    const rightWall = createWall(sidex - 1, 1, 1, sidey - 1, texture)
+    const bottomWall = createWall(0, sidey - 1, sidex - 1, 1, texture)
 
     return [...leftWall, ...topWall, ...rightWall, ...bottomWall]
 }

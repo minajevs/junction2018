@@ -17,8 +17,8 @@ export class Finish extends ex.Actor {
         this.setHeight(TILE);
         this.playerA = playerA
         this.playerB = playerB
-        this.x = 150 + tx * TILE;
-        this.y = 150 + ty * TILE;
+        this.x = TILE + tx * TILE;
+        this.y = TILE + ty * TILE;
         this.color = new ex.Color(255, 255, 255);
         this.collisionType = ex.CollisionType.Passive;
 

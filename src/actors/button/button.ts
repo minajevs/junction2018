@@ -9,8 +9,8 @@ export class Button extends ex.Actor {
         super();
         this.setWidth(TILE);
         this.setHeight(TILE);
-        this.x = 150 + tx * TILE;
-        this.y = 150 + ty * TILE;
+        this.x = TILE + tx * TILE;
+        this.y = TILE + ty * TILE;
         this.color = new ex.Color(255, 255, 255);
         this.addDrawing(texture)
         this.collisionType = ex.CollisionType.Passive;
