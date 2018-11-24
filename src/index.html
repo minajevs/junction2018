@@ -4,9 +4,53 @@
 <head>
     <meta charset="utf-8" />
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <style>
+    .tv-cadre .bds.bdlt {
+    top: 0;
+    left: 0;
+}
+.tv-cadre .bds {
+    position: absolute;
+    width: 640px;
+    opacity: 1;
+    height: 50%;
+    z-index: 1;
+    background: url(http://retrominder.tv/assets/img/bg/tv_texture_coin.png);
+}
+.tv-cadre .bds.bdrt {
+    top: 0;
+    right: 0;
+    -moz-transform: scaleX(-1);
+    -ms-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+.tv-cadre .bds.bdrb {
+    bottom: 0;
+    right: 0;
+    -moz-transform: scaleY(-1) scaleX(-1);
+    -ms-transform: scaleY(-1) scaleX(-1);
+    -webkit-transform: scaleY(-1) scaleX(-1);
+    transform: scaleY(-1) scaleX(-1);
+}
+.tv-cadre .bds.bdlb {
+    bottom: 0;
+    left: 0;
+    -moz-transform: scaleY(-1);
+    -ms-transform: scaleY(-1);
+    -webkit-transform: scaleY(-1);
+    transform: scaleY(-1);
+}
+</style>
 </head>
 
 <body>
+        <div class="tv-cadre">
+                <div class="bds bdlt"></div>
+                <div class="bds bdrt"></div>
+                <div class="bds bdrb"></div>
+                <div class="bds bdlb"></div>
+            </div>
 </body>
 
 </html>
