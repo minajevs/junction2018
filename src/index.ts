@@ -1,5 +1,6 @@
 import * as ex from 'excalibur';
 import { LevelOne } from './scenes/level-one/level-one';
+import { LevelTwo } from './scenes/level-one/level-one_2_left';
 import { Player } from './actors/player/player';
 import { Resources } from './resources';
 import { Keys } from 'excalibur/dist/Input';
@@ -41,7 +42,7 @@ const playerB = new Player(1, 1, false);
 const menu = new Menu(game)
 
 const levels = [
-  new LevelOne(playerA, playerB, game, timer),
+  new LevelTwo(playerA, playerB, game, timer),
   new Level1(playerA, playerB, game, timer)
 ]
 
