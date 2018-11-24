@@ -4,6 +4,7 @@ import { WallTile } from '../wall/wallTile';
 import { globalEvents } from "../../index"
 import { Player } from '../player/player';
 import { Resources } from '../../resources';
+import { portal } from "../../particles"
 
 const TILE = 48
 
@@ -23,6 +24,8 @@ export class Finish extends ex.Actor {
         this.collisionType = ex.CollisionType.Passive;
 
         this.addDrawing(Resources.Finish)
+
+        this.add(portal)
 
         this.on('collisionstart', (ev) => {
             if (!(ev.other instanceof Player)) return

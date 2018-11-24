@@ -8,6 +8,7 @@ import { Door } from "../../actors/door/door"
 import { Finish } from '../../actors/finish/finish';
 import { createButtonDoors, coords } from "../../createButtonDoors"
 import { flatten } from "lodash"
+import { background } from "../../particles"
 
 export class LevelOne extends Level {
   public onInitialize(engine: ex.Engine) { }
@@ -39,5 +40,6 @@ export class LevelOne extends Level {
     const objectsB = [...wall3, ...borders, ...flatten(doors), finish]
 
     super(playerA, playerB, objectsA, objectsB)
+    this.add(background)
   }
 }

@@ -9,7 +9,7 @@ export const globalEvents = new ex.EventDispatcher({})
 
 class Game extends ex.Engine {
   constructor() {
-    super({ width: 800, height: 600, displayMode: ex.DisplayMode.FullScreen });
+    super({ width: 800, height: 600, displayMode: ex.DisplayMode.FullScreen, backgroundColor: ex.Color.fromHex('#000000') });
   }
 
   public start(loader: ex.Loader) {
@@ -69,5 +69,5 @@ for (let key in Resources) {
 }
 
 game.start(loader).then(() => {
-  game.goToScene('menu');
+  game.goToScene('level0');
 });

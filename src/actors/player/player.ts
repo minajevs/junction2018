@@ -26,6 +26,29 @@ export class Player extends ex.Actor {
         this.addDrawing("hidden", Resources.Empty.asSprite())
         this.toggle(true)
 
+        var emitter = new ex.ParticleEmitter(0, 0, 0, 0);
+emitter.emitterType = ex.EmitterType.Circle;
+emitter.radius = 6;
+emitter.minVel = 0;
+emitter.maxVel = 24;
+emitter.minAngle = 0;
+emitter.maxAngle = 2.2;
+emitter.isEmitting = true;
+emitter.emitRate = 253;
+emitter.opacity = 0.5;
+emitter.fadeFlag = true;
+emitter.particleLife = 1475;
+emitter.maxSize = 2;
+emitter.minSize = 1;
+emitter.startSize = 2;
+emitter.endSize = 4;
+emitter.acceleration = new ex.Vector(0, -80);
+emitter.beginColor = ex.Color.Cyan;
+emitter.endColor = ex.Color.Magenta;
+
+emitter.isEmitting = true
+this.add(emitter)
+
         this.on('collisionstart', (ev) => {
             if (!this.collidable.some(collidableObject => ev.other instanceof collidableObject)) return
             if (ev.other instanceof Door && (ev.other as Door).opened) return
