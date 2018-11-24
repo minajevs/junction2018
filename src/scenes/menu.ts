@@ -20,7 +20,7 @@ export class Menu extends ex.Scene {
         const label = new ex.Label(
             "Click to start!",
             engine.getWorldBounds().right / 2,
-            engine.getWorldBounds().top + 70
+            engine.getWorldBounds().top + 140
         )
 
         label.fontFamily = "'Press Start 2P'"
@@ -49,7 +49,7 @@ export class Menu extends ex.Scene {
             engine.getWorldBounds().bottom / 2)
 
         const csprite = Resources.Controls.asSprite()
-        csprite.scale = new Vector(0.5, 0.5)
+        csprite.scale = new Vector(0.75, 0.75)
         controls.addDrawing(csprite)
 
         this.add(createBg(engine))
