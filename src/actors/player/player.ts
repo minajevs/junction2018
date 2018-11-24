@@ -2,13 +2,14 @@ import * as ex from 'excalibur';
 import { Keys } from 'excalibur/dist/Input';
 import { WallTile } from '../wall/wallTile';
 import { Resources } from '../../resources';
+import { Door } from '../door/door';
 
 const TILE = 64
 
 export class Player extends ex.Actor {
     private next: { x: number, y: number }
     private prev: { x: number, y: number }
-    private collidable = [WallTile]
+    private collidable = [WallTile, Door]
 
     constructor(tx: number, ty: number) {
         super();
@@ -27,6 +28,7 @@ export class Player extends ex.Actor {
 
         this.on('collisionstart', (ev) => {
             if (!this.collidable.some(collidableObject => ev.other instanceof collidableObject)) return
+            if (ev.other instanceof Door && (ev.other as Door).opened) return
 
             const col = this.collides(ev.other)
             if (col === null || Math.abs(col.x) < 5 && Math.abs(col.y) < 5) return
