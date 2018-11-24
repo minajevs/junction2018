@@ -103,8 +103,8 @@ export class LevelTwo extends Level {
 
   constructor(playerA: Player, playerB: Player, engine: Game, timer: ex.Label) {
     const offsetx = engine.getWorldBounds().right / 2 + 24 - mapA[0].length / 2 * 48
-    const mapATiles = createWalls(offsetx, mapA)
-    const mapBTiles = createWalls(offsetx, mapB)
+    const mapATiles = createWalls(offsetx, mapA, true)
+    const mapBTiles = createWalls(offsetx, mapB, false)
     const buttonsDoorsCoordsA = [
       {
         button: { x: 3, y: 7 },
@@ -144,8 +144,8 @@ export class LevelTwo extends Level {
     // zhuchka.guljatj(new Vector(10, 2), 100)
     // suchka.guljatj(new Vector(2, 10), 100)
 
-    const objectsA = [...mapATiles, ...buttonsA, ...flatten(doorsB), /*zhuchka*/, finish]
-    const objectsB = [...mapBTiles, ...buttonsB, ...flatten(doorsA), /*suchka*/, finish]
+    const objectsA = [timer, ...mapATiles, ...buttonsA, ...flatten(doorsB), /*zhuchka*/, finish]
+    const objectsB = [timer, ...mapBTiles, ...buttonsB, ...flatten(doorsA), /*suchka*/, finish]
 
     super(playerA, playerB, objectsA, objectsB, engine)
 

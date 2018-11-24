@@ -67,6 +67,7 @@ game.input.pointers.primary.on("down", () => {
   // Mouse click
   game.input.pointers.primary.off("down");
   //timer.setTime(0)
+  timer.setTime(0)
   game.goToScene('level0');
 });
 
