@@ -18,6 +18,6 @@ emitter.endSize = 0;
 emitter.acceleration = new ex.Vector(7, -215);
 emitter.beginColor = ex.Color.White;
 emitter.endColor = ex.Color.White;
-emitter.isEmitting = false;
+emitter.isEmitting = true;
 
 export default emitter

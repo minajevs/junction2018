@@ -1,32 +1,109 @@
 import * as ex from 'excalibur';
 import { Player } from '../actors/player/player';
 import { Level } from './level';
-import { createWall, createBorders } from '../actors/wall/wall';
+import { createWall, createBorders, createWalls } from '../actors/wall/wall';
 import { Resources } from '../resources';
+import { MagentaResources } from '../magentaResources';
+import { CyanResources } from '../cyanResources';
 import { Button } from "../actors/button/button"
 import { Door } from "../actors/door/door"
 import { Finish } from '../actors/finish/finish';
-import { createBg } from './createbg';
+import { createButtonDoors, coords } from "../createButtonDoors"
+import { flatten } from "lodash"
+import { background } from "../particles"
+import { Sobaka } from '../actors/sobaka/sobaka';
+import { Vector } from 'excalibur';
 import { ScoreTime } from '../actors/timer';
 
-export class Level1 extends Level {
+const {
+    leftTop: mlt,
+    leftBottom: mlb,
+    rightTop: mrt,
+    rightBottom: mrb,
+
+    endLeft: mel,
+    endDown: med,
+    endRight: mer,
+    endTop: met,
+
+    leftRight: mlr,
+    topDown: mtb,
+
+    cross: mcc,
+    tTop: mtt,
+    tDown: mtd,
+    tRight: mtr,
+    tLeft: mtl
+} = MagentaResources
+
+const {
+    leftTop: clt,
+    leftBottom: clb,
+    rightTop: crt,
+    rightBottom: crb,
+
+    endLeft: cel,
+    endDown: ced,
+    endRight: cer,
+    endTop: cet,
+
+    leftRight: clr,
+    topDown: ctb,
+
+    cross: ccc,
+    tTop: ctt,
+    tDown: ctd,
+    tRight: ctr,
+    tLeft: ctl
+} = CyanResources
+
+const mapA = [
+    [mlt, mtd, mlr, mlr, mtd, mlr, mlr, mlr, mtd, mrt],
+    [mtr, mrb, ' ', ' ', mtb, ' ', ' ', ' ', mtb, mtb],
+    [mtb, ' ', ' ', ' ', mtr, mlr, mrt, ' ', mlb, mtl],
+    [mtb, ' ', mel, mlr, mtt, mlr, mtl, ' ', ' ', mtb],
+    [mtb, ' ', ' ', ' ', ' ', ' ', mtb, ' ', ' ', mtb],
+    [mtb, ' ', met, ' ', met, ' ', mtr, mer, ' ', mtb],
+    [mtr, mlr, mrb, ' ', mtb, ' ', med, ' ', ' ', mtb],
+    [mtb, ' ', ' ', ' ', mtb, ' ', ' ', ' ', ' ', mtb],
+    [mlb, mlr, mlr, mlr, mtt, mlr, mlr, mlr, mlr, mrb]
+]
+
+const mapB = [
+    [clt, ctd, clr, clr, clr, clr, ctd, clr, ctd, crt],
+    [ctb, ctb, ' ', ' ', ' ', ' ', ctb, ' ', clb, ctl],
+    [ctr, crb, ' ', cet, ' ', ' ', ctb, ' ', ' ', ctb],
+    [ctb, ' ', ' ', ctr, ctd, clr, ctt, cer, ' ', ctb],
+    [ctb, ' ', clt, ctt, crb, ' ', ' ', ' ', ' ', ctb],
+    [ctb, ' ', ctb, ' ', ' ', ' ', clt, clr, clr, ctl],
+    [ctb, ' ', ced, ' ', cet, ' ', ced, ' ', ' ', ctb],
+    [ctb, ' ', ' ', ' ', ctb, ' ', ' ', ' ', ' ', ctb],
+    [clb, clr, clr, clr, ctt, clr, clr, clr, clr, crb]
+]
+
+export class LevelOne extends Level {
+    zhuchka: Sobaka
+    suchka: Sobaka
     public onInitialize(engine: ex.Engine) { }
     public onActivate() {
-        this.setPlayers(0, 1, 1, 7, 7)
+        const offsetx = this.engine.getWorldBounds().right / 2 + 24 - mapA[0].length / 2 * 48
+        this.setPlayers(offsetx, 1, 7, 8, 7)
     }
     public onDeactivate() { }
 
-    constructor(playerA: Player, playerB: Player, engine: ex.Engine, time: ex.Label) {
+    constructor(playerA: Player, playerB: Player, engine: ex.Engine, timer: ex.Label) {
+        const offsetx = engine.getWorldBounds().right / 2 + 24 - mapA[0].length / 2 * 48
+        const mapATiles = createWalls(offsetx, mapA, true)
+        const mapBTiles = createWalls(offsetx, mapB, false)
 
 
-        const door = new Door(0, 2, 4, Resources.Door, Resources.Sword)
-        // const button = new Button(2, 2, Resources.Sword, [door])
+        const finish = new Finish(offsetx, 5, 1, playerA, playerB)
 
-        const finish = new Finish(0, 4, 4, playerA, playerB)
-
-        const objectsA = [time, finish]
-        const objectsB = [time, finish]
+        const objectsA = [...mapATiles, finish]
+        const objectsB = [...mapBTiles, finish]
 
         super(playerA, playerB, objectsA, objectsB, engine)
+
+        this.add(background)
     }
 }

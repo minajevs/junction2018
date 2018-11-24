@@ -41,7 +41,6 @@ export class Sobaka extends ex.Actor {
         this.addDrawing("right", isA ? MagentaResources.dogRight.asSprite() : CyanResources.dogRight.asSprite())
         this.addDrawing("hidden", Resources.Empty.asSprite())
         this.toggle(true)
-        this.add(!isA ? player1particle : player2particle)
 
         this.on('collisionstart', (ev) => {
             if (ev.other instanceof Door && (ev.other as Door).opened) return
