@@ -7,6 +7,7 @@ import { CyanResources } from '../../cyanResources';
 import { Door } from '../door/door';
 import { globalEvents } from '../..';
 import { player1particle, player2particle } from "../../particles"
+import { Button } from '../button/button';
 
 const TILE = 48
 
@@ -17,6 +18,7 @@ export class Player extends ex.Actor {
     private collidable = [WallTile, Door]
     startpos: number
     isA: boolean
+    moving: boolean = false
 
     constructor(tx: number, ty: number, isA: boolean) {
         super();
@@ -40,6 +42,7 @@ export class Player extends ex.Actor {
         this.add(!isA ? player1particle : player2particle)
 
         this.on('collisionstart', (ev) => {
+            if (this.moving === false) return
             if (!this.collidable.some(collidableObject => ev.other instanceof collidableObject)) return
             if (ev.other instanceof Door && (ev.other as Door).opened) return
 
@@ -63,6 +66,7 @@ export class Player extends ex.Actor {
         this.y = this.prev.y
         this.next = { ...this.prev }
         this.target = new ex.Vector(this.prev.x, this.prev.y)
+        this.moving = false
     }
 
     setPos = (startpos: number, x: number, y: number) => {
@@ -75,6 +79,7 @@ export class Player extends ex.Actor {
 
     move = (event: ex.Input.KeyEvent) => {
         this.setZIndex(1000)
+        this.moving = true
         const x = event.key === Keys.A
             ? -1
             : event.key === Keys.D
@@ -96,6 +101,9 @@ export class Player extends ex.Actor {
         // this.prev = { ...this.next }
         // this.next = { x: this.next.x + x * TILE, y: this.next.y + y * TILE }
 
-        const contex = this.actions.moveTo(this.target.x, this.target.y, 500).asPromise()
+        const contex = this.actions.moveTo(this.target.x, this.target.y, 500).asPromise().then(_ => {
+            this.moving = false
+        }
+        )
     }
 }

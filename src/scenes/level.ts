@@ -36,12 +36,13 @@ export class Level extends ex.Scene {
         this.playerB = playerB
         this.objectA = objectsA
         this.objectB = objectsB
-
-        this.add(createBg(engine))
         this.add(timer)
+        this.add(createBg(engine))
     }
 
     setPlayers = (startpos: number, xa: number, ya: number, xb: number, yb: number) => {
+        this.add(this.playerA)
+        this.add(this.playerB)
         this.playerA.cancelMove()
         this.playerB.cancelMove()
         this.playerA.setPos(startpos, xa, ya)
@@ -76,10 +77,10 @@ export class Level extends ex.Scene {
         this.playerB.toggle(!aActive)
         this.clear()
         if (aActive) {
-            this.add(this.playerA)
+            //this.add(this.playerA)
             this.objectA.forEach(x => this.add(x))
         } else {
-            this.add(this.playerB)
+            //this.add(this.playerB)
             this.objectB.forEach(x => this.add(x))
         }
     }

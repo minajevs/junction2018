@@ -95,8 +95,8 @@ export class LevelOne extends Level {
     const offsetx = this.engine.getWorldBounds().right / 2 + 24 - mapA[0].length / 2 * 48
     this.setPlayers(offsetx, 6, 4, 1, 5)
 
-    this.zhuchka.setPos(offsetx, 5, 1, new Vector(10, 2))
-    this.suchka.setPos(offsetx, 1, 5, new Vector(1, 10))
+    //this.zhuchka.setPos(offsetx, 5, 1, new Vector(10, 2))
+    //this.suchka.setPos(offsetx, 1, 5, new Vector(1, 10))
   }
   public onDeactivate() { }
 

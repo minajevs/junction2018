@@ -31,7 +31,7 @@ export class Button extends ex.Actor {
             if (!this.collides(ev.other)) return
             this.actors.forEach(actor => {
                 const toggle = (actor as any).toggle
-
+                console.log('press')
                 if (typeof toggle === 'function') {
                     toggle(true)
                     this.setDrawing('pressed')
@@ -45,6 +45,7 @@ export class Button extends ex.Actor {
             if (this.collides(ev.other)) return
             this.actors.forEach(actor => {
                 const toggle = (actor as any).toggle
+                console.log('depress')
 
                 if (typeof toggle === 'function') {
                     toggle(false)
