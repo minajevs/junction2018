@@ -2,9 +2,11 @@ import * as ex from 'excalibur';
 import { Player } from '../actors/player/player';
 import { createWall } from '../actors/wall/wall';
 import { Resources } from '../resources';
+import { createBg } from './createbg';
 
 export class Level extends ex.Scene {
-    public onInitialize(engine: ex.Engine) { }
+    public onInitialize(engine: ex.Engine) {
+    }
     public onActivate() { }
     public onDeactivate() { }
 
@@ -16,12 +18,14 @@ export class Level extends ex.Scene {
     private objectA: ex.Actor[]
     private objectB: ex.Actor[]
 
-    constructor(playerA: Player, playerB: Player, objectsA: ex.Actor[], objectsB: ex.Actor[]) {
+    constructor(playerA: Player, playerB: Player, objectsA: ex.Actor[], objectsB: ex.Actor[], engine: ex.Engine) {
         super()
         this.playerA = playerA
         this.playerB = playerB
         this.objectA = objectsA
         this.objectB = objectsB
+
+        this.add(createBg(engine))
     }
 
     setPlayers = (xa: number, ya: number, xb: number, yb: number) => {

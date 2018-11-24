@@ -6,6 +6,7 @@ const door = require('./images32/block_06.png');
 const finish = require('./images32/environment_03.png');
 
 const controls = require('./images32/Controls.png');
+const bg = require('./images-retrowave/bg.png');
 
 let Resources = {
     Sword: new ex.Texture(sword),
@@ -13,6 +14,7 @@ let Resources = {
     Door: new ex.Texture(door),
     Finish: new ex.Texture(finish),
 
+    Bg: new ex.Texture(bg),
     Controls: new ex.Texture(controls),
 }
 

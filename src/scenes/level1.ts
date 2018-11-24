@@ -6,6 +6,7 @@ import { Resources } from '../resources';
 import { Button } from "../actors/button/button"
 import { Door } from "../actors/door/door"
 import { Finish } from '../actors/finish/finish';
+import { createBg } from './createbg';
 
 export class Level1 extends Level {
     public onInitialize(engine: ex.Engine) { }
@@ -14,7 +15,7 @@ export class Level1 extends Level {
     }
     public onDeactivate() { }
 
-    constructor(playerA: Player, playerB: Player) {
+    constructor(playerA: Player, playerB: Player, engine: ex.Engine) {
         const borders = createBorders(9, 9, Resources.Sword)
         const wallA1 = createWall(2, 1, 2, 6, Resources.Sword)
         const wallA2 = createWall(5, 1, 3, 7, Resources.Sword)
@@ -30,6 +31,6 @@ export class Level1 extends Level {
         const objectsA = [...wallA1, ...wallA2, ...borders, finish]
         const objectsB = [...wallB1, ...wallB2, ...borders, finish]
 
-        super(playerA, playerB, objectsA, objectsB)
+        super(playerA, playerB, objectsA, objectsB, engine)
     }
 }
