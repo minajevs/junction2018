@@ -37,9 +37,11 @@ export class Player extends ex.Actor {
         this.toggle(true)
         this.add(!isA ? player1particle : player2particle)
 
-        this.on('precollision', (ev) => {
+        this.on('collisionstart', (ev) => {
             if (!this.collidable.some(collidableObject => ev.other instanceof collidableObject)) return
             if (ev.other instanceof Door && (ev.other as Door).opened) return
+
+            if (ev.other instanceof WallTile && ev.other.isA !== this.isA) return
 
             this.cancelMove()
         });
@@ -50,7 +52,7 @@ export class Player extends ex.Actor {
     }
 
     cancelMove = () => {
-        this.actions.clearActions()
+        console.log('cancel', this.isA ? 'A' : 'B')
         this.x = this.prev.x
         this.y = this.prev.y
     }

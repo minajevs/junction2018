@@ -112,8 +112,8 @@ export class LevelTwo extends Level {
 
   constructor(playerA: Player, playerB: Player, engine: ex.Engine, timer: ex.Label) {
     const offsetx = engine.getWorldBounds().right / 2 + 24 - mapA[0].length / 2 * 48
-    const mapATiles = createWalls(offsetx, mapA)
-    const mapBTiles = createWalls(offsetx, mapB)
+    const mapATiles = createWalls(offsetx, mapA, true)
+    const mapBTiles = createWalls(offsetx, mapB, false)
     const buttonsDoorsCoordsA = [
       {
         button: { x: 1, y: 12 },
