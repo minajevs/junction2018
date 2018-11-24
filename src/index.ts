@@ -1,10 +1,10 @@
 import * as ex from 'excalibur';
-import { LevelOne } from './scenes/level-one/level-one';
-import { LevelTwo } from './scenes/level-one/level-one_2_left';
+import { LevelOne } from './scenes/level1';
+import { LevelTwo } from './scenes/level2';
+import { LevelThree } from './scenes/level3';
 import { Player } from './actors/player/player';
 import { Resources } from './resources';
 import { Keys } from 'excalibur/dist/Input';
-import { Level1 } from './scenes/level1';
 import { Menu } from './scenes/menu';
 import { MagentaResources } from './magentaResources';
 import { CyanResources } from './cyanResources';
@@ -42,8 +42,9 @@ const playerB = new Player(1, 1, false);
 const menu = new Menu(game)
 
 const levels = [
+  new LevelOne(playerA, playerB, game, timer),
   new LevelTwo(playerA, playerB, game, timer),
-  new Level1(playerA, playerB, game, timer)
+  new LevelThree(playerA, playerB, game, timer)
 ]
 
 // vars

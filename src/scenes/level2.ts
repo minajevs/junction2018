@@ -1,19 +1,19 @@
 import * as ex from 'excalibur';
-import { Player } from '../../actors/player/player';
-import { Level } from '../level';
-import { createWall, createBorders, createWalls } from '../../actors/wall/wall';
-import { Resources } from '../../resources';
-import { MagentaResources } from '../../magentaResources';
-import { CyanResources } from '../../cyanResources';
-import { Button } from "../../actors/button/button"
-import { Door } from "../../actors/door/door"
-import { Finish } from '../../actors/finish/finish';
-import { createButtonDoors, coords } from "../../createButtonDoors"
+import { Player } from '../actors/player/player';
+import { Level } from './level';
+import { createWall, createBorders, createWalls } from '../actors/wall/wall';
+import { Resources } from '../resources';
+import { MagentaResources } from '../magentaResources';
+import { CyanResources } from '../cyanResources';
+import { Button } from "../actors/button/button"
+import { Door } from "../actors/door/door"
+import { Finish } from '../actors/finish/finish';
+import { createButtonDoors, coords } from "../createButtonDoors"
 import { flatten } from "lodash"
-import { background } from "../../particles"
-import { Sobaka } from '../../actors/sobaka/sobaka';
+import { background } from "../particles"
+import { Sobaka } from '../actors/sobaka/sobaka';
 import { Vector } from 'excalibur';
-import { ScoreTime } from '../../actors/timer';
+import { ScoreTime } from '../actors/timer';
 
 const {
   leftTop: mlt,
@@ -87,7 +87,7 @@ const mapB = [
   [clb, clr, ctt, clr, clr, clr, ctt, clr, ctt, clr, ctt, crb]
 ]
 
-export class LevelOne extends Level {
+export class LevelTwo extends Level {
   zhuchka: Sobaka
   suchka: Sobaka
   public onInitialize(engine: ex.Engine) { }
