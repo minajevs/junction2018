@@ -33,7 +33,7 @@ class Game extends ex.Engine {
 */
 const game = new Game();
 let loader = new ex.Loader();
-const timer = createTimer()
+const timer = new ScoreTime(game)
 
 const playerA = new Player(1, 1, true);
 const playerB = new Player(1, 1, false);
@@ -67,19 +67,22 @@ game.input.pointers.primary.on("down", () => {
   game.goToScene('level0');
 });
 
-const onPressEvent = (event: ex.Input.KeyEvent) => {
-  if (event.key === Keys.Space) {
-    aActive = !aActive
-    level.switchType(aActive)
-  }
-
+const onHoldEvent = (event: ex.Input.KeyEvent) => {
   if (aActive)
     playerA.move(event)
   else
     playerB.move(event)
 }
 
-game.input.keyboard.on('hold', onPressEvent)
+const onPressEvent = (event: ex.Input.KeyEvent) => {
+  if (event.key === Keys.Space) {
+    aActive = !aActive
+    level.switchType(aActive)
+  }
+}
+
+game.input.keyboard.on('hold', onHoldEvent)
+game.input.keyboard.on('press', onPressEvent)
 
 /* 
  Load resources
