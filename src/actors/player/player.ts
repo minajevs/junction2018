@@ -12,9 +12,9 @@ const TILE = 48
 
 export class Player extends ex.Actor {
     private next: { x: number, y: number }
-    private prev: { x: number, y: number }
+    private prev: ex.Vector
+    private target: ex.Vector
     private collidable = [WallTile, Door]
-    private moving = false
 
     constructor(tx: number, ty: number, isA: boolean) {
         super();
@@ -23,7 +23,8 @@ export class Player extends ex.Actor {
         this.x = TILE + tx * TILE;
         this.y = TILE + ty * TILE;
         this.next = { x: this.x, y: this.y }
-        this.prev = { x: this.x, y: this.y }
+        this.prev = new ex.Vector(this.x, this.y)
+        this.target = new ex.Vector(this.x, this.y)
         this.color = new ex.Color(255, 255, 255);
         this.collisionType = ex.CollisionType.Passive;
 
@@ -40,15 +41,14 @@ export class Player extends ex.Actor {
             if (!this.collidable.some(collidableObject => ev.other instanceof collidableObject)) return
             if (ev.other instanceof Door && (ev.other as Door).opened) return
 
-            const col = this.collides(ev.other)
-            if (col === null || Math.abs(col.x) < 5 && Math.abs(col.y) < 5) return
-            this.cancelMove()
-        });
-    }
+            const dist = this.target.distance(new ex.Vector(ev.other.x, ev.other.y))
+            if (dist !== 48)
+                this.cancelMove()
 
-    endMove = () => {
-        this.moving = false
-        globalEvents.emit('endMove')
+            //const col = this.collides(ev.other)
+            //if (col === null || Math.abs(col.x) < 5 && Math.abs(col.y) < 5) return
+            //this.cancelMove()
+        });
     }
 
     toggle = (flag: boolean) => {
@@ -60,19 +60,17 @@ export class Player extends ex.Actor {
         this.x = this.prev.x
         this.y = this.prev.y
         this.next = { ...this.prev }
-        this.endMove()
+        this.target = new ex.Vector(this.prev.x, this.prev.y)
     }
 
     setPos = (x: number, y: number) => {
         this.x = TILE + x * TILE;
         this.y = TILE + y * TILE;
         this.next = { x: this.x, y: this.y }
-        this.prev = { x: this.x, y: this.y }
+        // this.prev = { x: this.x, y: this.y }
     }
 
     move = (event: ex.Input.KeyEvent) => {
-        if (this.moving) return
-        this.moving = true
         this.setZIndex(1000)
         const x = event.key === Keys.A
             ? -1
@@ -89,14 +87,12 @@ export class Player extends ex.Actor {
         if (x < 0) this.setDrawing('left')
         if (x > 0) this.setDrawing('right')
 
-        this.prev = { ...this.next }
-        this.next = { x: this.next.x + x * TILE, y: this.next.y + y * TILE }
+        this.prev = new ex.Vector(this.target.x, this.target.y)
+        this.target = new ex.Vector(this.target.x + x * TILE, this.target.y + y * TILE)
 
-        const contex = this.actions.moveTo(this.next.x, this.next.y, 500).asPromise()
+        // this.prev = { ...this.next }
+        // this.next = { x: this.next.x + x * TILE, y: this.next.y + y * TILE }
 
-        contex.then(_ => {
-            this.prev = { ...this.next }
-            this.endMove()
-        })
+        const contex = this.actions.moveTo(this.target.x, this.target.y, 500).asPromise()
     }
 }

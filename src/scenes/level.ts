@@ -3,6 +3,16 @@ import { Player } from '../actors/player/player';
 import { createWall } from '../actors/wall/wall';
 import { Resources } from '../resources';
 import { createBg } from './createbg';
+import { globalEvents } from '..';
+import { Sobaka } from '../actors/sobaka/sobaka';
+
+export class ChangeTypeEvent extends ex.GameEvent<boolean>{
+    data: boolean
+    constructor(data: boolean) {
+        super()
+        this.data = data
+    }
+}
 
 export class Level extends ex.Scene {
     public onInitialize(engine: ex.Engine) {
@@ -39,17 +49,28 @@ export class Level extends ex.Scene {
             this.switchType(this.aActive)
         })
 
+        this.switchType(true)
+        this.switchType(false)
         this.switchType(this.aActive)
     }
 
     private clear = () => {
         // this.remove(this.playerA)
         // this.remove(this.playerB)
-        this.objectA.forEach(x => this.remove(x))
-        this.objectB.forEach(x => this.remove(x))
+        this.objectA.forEach(x => {
+            if (x instanceof Sobaka) return
+            this.remove(x)
+        })
+        this.objectB.forEach(x => {
+            if (x instanceof Sobaka) return
+            this.remove(x)
+        })
     }
 
     switchType = (aActive: boolean) => {
+        globalEvents.emit('switchType', new ChangeTypeEvent(aActive))
+        this.playerA.toggle(aActive)
+        this.playerB.toggle(!aActive)
         this.clear()
         if (aActive) {
             this.add(this.playerA)

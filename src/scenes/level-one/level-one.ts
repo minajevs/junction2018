@@ -11,6 +11,8 @@ import { Finish } from '../../actors/finish/finish';
 import { createButtonDoors, coords } from "../../createButtonDoors"
 import { flatten } from "lodash"
 import { background } from "../../particles"
+import { Sobaka } from '../../actors/sobaka/sobaka';
+import { Vector } from 'excalibur';
 
 const {
   leftTop: mlt,
@@ -93,6 +95,8 @@ const mapB = [
 ]
 
 export class LevelOne extends Level {
+  zhuchka: Sobaka
+  suchka: Sobaka
   public onInitialize(engine: ex.Engine) { }
   public onActivate() {
     this.setPlayers(1, 1, 4, 4)
@@ -116,10 +120,17 @@ export class LevelOne extends Level {
 
     const finish = new Finish(4, 4, playerA, playerB)
 
-    const objectsA = [...mapATiles, ...buttons, finish]
-    const objectsB = [...mapBTiles, ...flatten(doors), finish]
+    const zhuchka = new Sobaka(5, 1, true)
+    const suchka = new Sobaka(1, 5, false)
+
+    zhuchka.guljatj(new Vector(10, 2), 100)
+    suchka.guljatj(new Vector(2, 10), 100)
+
+    const objectsA = [...mapATiles, ...buttons, zhuchka, finish]
+    const objectsB = [...mapBTiles, ...flatten(doors), suchka, finish]
 
     super(playerA, playerB, objectsA, objectsB, engine)
+
     this.add(background)
   }
 }

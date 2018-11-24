@@ -31,10 +31,16 @@ const dho = require('./images-retrowave/magenta/door_3_4_opened.png');
 const dvc = require('./images-retrowave/magenta/door2.png');
 const dvo = require('./images-retrowave/magenta/door1_2_opened.png');
 
+const dogLeft = require('./images-retrowave/magenta/dog_left.png');
+const dogRight = require('./images-retrowave/magenta/dog_right.png');
+
 
 let MagentaResources = {
     copLeft: new ex.Texture(copLeft),
     copRight: new ex.Texture(copRight),
+
+    dogLeft: new ex.Texture(dogLeft),
+    dogRight: new ex.Texture(dogRight),
 
     btn: new ex.Texture(btn),
     btnPressed: new ex.Texture(btnPressed),

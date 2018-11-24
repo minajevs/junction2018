@@ -7,7 +7,6 @@ emitter.minVel = 0;
 emitter.maxVel = 100;
 emitter.minAngle = 0;
 emitter.maxAngle = 6.2;
-emitter.isEmitting = true;
 emitter.emitRate = 25;
 emitter.opacity = 0.83;
 emitter.fadeFlag = true;
@@ -19,6 +18,6 @@ emitter.endSize = 0;
 emitter.acceleration = new ex.Vector(0, 0);
 emitter.beginColor = ex.Color.fromHex("ED1B7B");
 emitter.endColor = ex.Color.fromHex("ED1B7B");
-emitter.isEmitting = true
+emitter.isEmitting = false
 
 export default emitter

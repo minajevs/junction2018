@@ -67,8 +67,6 @@ const onPressEvent = (event: ex.Input.KeyEvent) => {
   if (event.key === Keys.Space) {
     aActive = !aActive
     level.switchType(aActive)
-    playerA.toggle(aActive)
-    playerB.toggle(!aActive)
   }
 
   if (aActive)
