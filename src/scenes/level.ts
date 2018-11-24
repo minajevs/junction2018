@@ -5,6 +5,7 @@ import { Resources } from '../resources';
 import { createBg } from './createbg';
 import { globalEvents } from '..';
 import { Sobaka } from '../actors/sobaka/sobaka';
+import { ScoreTime } from '../actors/timer';
 
 export class ChangeTypeEvent extends ex.GameEvent<boolean>{
     data: boolean
@@ -28,21 +29,23 @@ export class Level extends ex.Scene {
     private objectA: ex.Actor[]
     private objectB: ex.Actor[]
 
-    constructor(playerA: Player, playerB: Player, objectsA: ex.Actor[], objectsB: ex.Actor[], engine: ex.Engine) {
+    constructor(playerA: Player, playerB: Player, objectsA: ex.Actor[], objectsB: ex.Actor[], engine: ex.Engine, timer: ScoreTime) {
         super()
+        this.engine = engine
         this.playerA = playerA
         this.playerB = playerB
         this.objectA = objectsA
         this.objectB = objectsB
 
         this.add(createBg(engine))
+        this.add(timer)
     }
 
-    setPlayers = (xa: number, ya: number, xb: number, yb: number) => {
-        this.playerA.setPos(xa, ya)
-        this.playerB.setPos(xb, yb)
+    setPlayers = (startpos: number, xa: number, ya: number, xb: number, yb: number) => {
         this.playerA.cancelMove()
         this.playerB.cancelMove()
+        this.playerA.setPos(startpos, xa, ya)
+        this.playerB.setPos(startpos, xb, yb)
 
         this.on("changePlayer", _ => {
             this.aActive = !this.aActive

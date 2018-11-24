@@ -5,12 +5,12 @@ const TILE = 48
 export class Door extends ex.Actor {
   opened: boolean = false
 
-  constructor(tx: number, ty: number, texture: ex.Texture, altTexture: ex.Texture) {
+  constructor(startpos: number, tx: number, ty: number, texture: ex.Texture, altTexture: ex.Texture) {
     super();
     this.setWidth(TILE);
     this.setHeight(TILE);
-    this.x = TILE + tx * TILE;
-    this.y = TILE + ty * TILE;
+    this.x = startpos + tx * TILE;
+    this.y = 48 + ty * TILE;
     this.color = new ex.Color(255, 255, 255);
     this.addDrawing("closed", texture.asSprite())
     this.addDrawing("opened", altTexture.asSprite())

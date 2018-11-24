@@ -5,12 +5,12 @@ const TILE = 48
 export class Button extends ex.Actor {
     actors: ex.Actor[]
 
-    constructor(tx: number, ty: number, texture: ex.Texture, texturePressed: ex.Texture, actors: ex.Actor[]) {
+    constructor(startpos: number, tx: number, ty: number, texture: ex.Texture, texturePressed: ex.Texture, actors: ex.Actor[]) {
         super();
         this.setWidth(TILE);
         this.setHeight(TILE);
-        this.x = TILE + tx * TILE;
-        this.y = TILE + ty * TILE;
+        this.x = startpos + tx * TILE;
+        this.y = 48 + ty * TILE;
         this.color = new ex.Color(255, 255, 255);
         this.addDrawing('default', texture.asSprite())
         this.addDrawing('pressed', texturePressed.asSprite())

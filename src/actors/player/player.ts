@@ -15,6 +15,7 @@ export class Player extends ex.Actor {
     private prev: ex.Vector
     private target: ex.Vector
     private collidable = [WallTile, Door]
+    startpos: number
     isA: boolean
 
     constructor(tx: number, ty: number, isA: boolean) {
@@ -28,7 +29,6 @@ export class Player extends ex.Actor {
         this.target = new ex.Vector(this.x, this.y)
         this.color = new ex.Color(255, 255, 255);
         this.collisionType = ex.CollisionType.Passive;
-
         this.isA = isA
         const sprite = MagentaResources.copLeft.asSprite()
 
@@ -65,11 +65,12 @@ export class Player extends ex.Actor {
         this.target = new ex.Vector(this.prev.x, this.prev.y)
     }
 
-    setPos = (x: number, y: number) => {
-        this.x = TILE + x * TILE;
-        this.y = TILE + y * TILE;
-        this.next = { x: this.x, y: this.y }
-        // this.prev = { x: this.x, y: this.y }
+    setPos = (startpos: number, x: number, y: number) => {
+        this.startpos = startpos
+        this.x = this.startpos + (x * TILE)
+        this.y = 48 + y * TILE;
+        this.target = new ex.Vector(this.x, this.y)
+        this.prev = new ex.Vector(this.x, this.y)
     }
 
     move = (event: ex.Input.KeyEvent) => {

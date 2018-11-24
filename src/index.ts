@@ -7,6 +7,7 @@ import { Level1 } from './scenes/level1';
 import { Menu } from './scenes/menu';
 import { MagentaResources } from './magentaResources';
 import { CyanResources } from './cyanResources';
+import { ScoreTime } from './actors/timer';
 
 export const globalEvents = new ex.EventDispatcher({})
 
@@ -31,6 +32,7 @@ class Game extends ex.Engine {
 */
 const game = new Game();
 let loader = new ex.Loader();
+const timer = new ScoreTime(game)
 
 const playerA = new Player(1, 1, true);
 const playerB = new Player(1, 1, false);
@@ -39,8 +41,8 @@ const playerB = new Player(1, 1, false);
 const menu = new Menu(game)
 
 const levels = [
-  new LevelOne(playerA, playerB, game),
-  new Level1(playerA, playerB, game)
+  new LevelOne(playerA, playerB, game, timer),
+  new Level1(playerA, playerB, game, timer)
 ]
 
 // vars
@@ -97,6 +99,17 @@ for (let key in CyanResources) {
 globalEvents.on('finishLevel', _ => {
   leveli++
   level = levels[leveli]
+  game.goToScene(`level${leveli}`)
+  level.onActivate()
+  aActive = true
+  level.switchType(aActive)
+  playerA.toggle(aActive)
+  playerB.toggle(!aActive)
+})
+
+globalEvents.on('playerDeath', _ => {
+  // leveli++
+  // level = levels[leveli]
   game.goToScene(`level${leveli}`)
   level.onActivate()
   aActive = true

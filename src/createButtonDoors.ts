@@ -9,8 +9,9 @@ export type coords = {
   y: number
 }
 
-export const createButtonDoors = (buttonCoords: coords, doorsCoords: coords, horizontal: boolean, isA: boolean) => {
+export const createButtonDoors = (startpos: number, buttonCoords: coords, doorsCoords: coords, horizontal: boolean, isA: boolean) => {
   const doors = [doorsCoords].map(coords => new Door(
+    startpos,
     coords.x,
     coords.y,
     horizontal
@@ -29,6 +30,7 @@ export const createButtonDoors = (buttonCoords: coords, doorsCoords: coords, hor
         : CyanResources.doorHorizontalOpen,
   ))
   const button = new Button(
+    startpos,
     buttonCoords.x,
     buttonCoords.y,
     isA ? MagentaResources.btn : CyanResources.btn,
