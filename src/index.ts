@@ -79,7 +79,7 @@ const onPressEvent = (event: ex.Input.KeyEvent) => {
     playerB.move(event)
 }
 
-game.input.keyboard.on('press', onPressEvent)
+game.input.keyboard.on('hold', onPressEvent)
 
 /* 
  Load resources

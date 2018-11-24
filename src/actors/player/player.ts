@@ -11,10 +11,9 @@ import { player1particle, player2particle } from "../../particles"
 const TILE = 48
 
 export class Player extends ex.Actor {
-    private next: { x: number, y: number }
     private prev: { x: number, y: number }
     private collidable = [WallTile, Door]
-    private moving = false
+    moving: boolean
     startpos: number
     isA: boolean
 
@@ -24,11 +23,11 @@ export class Player extends ex.Actor {
         this.setHeight(TILE);
         this.x = TILE + tx * TILE;
         this.y = TILE + ty * TILE;
-        this.next = { x: this.x, y: this.y }
         this.prev = { x: this.x, y: this.y }
         this.color = new ex.Color(255, 255, 255);
         this.collisionType = ex.CollisionType.Passive;
         this.isA = isA
+        this.moving = false
         const sprite = MagentaResources.copLeft.asSprite()
 
         this.addDrawing("left", isA ? MagentaResources.copLeft.asSprite() : CyanResources.copLeft.asSprite())
@@ -38,19 +37,12 @@ export class Player extends ex.Actor {
         this.toggle(true)
         this.add(!isA ? player1particle : player2particle)
 
-        this.on('collisionstart', (ev) => {
+        this.on('precollision', (ev) => {
             if (!this.collidable.some(collidableObject => ev.other instanceof collidableObject)) return
             if (ev.other instanceof Door && (ev.other as Door).opened) return
 
-            const col = this.collides(ev.other)
-            if (col === null || Math.abs(col.x) < 7 && Math.abs(col.y) < 7) return
             this.cancelMove()
         });
-    }
-
-    endMove = () => {
-        this.moving = false
-        globalEvents.emit('endMove')
     }
 
     toggle = (flag: boolean) => {
@@ -61,15 +53,12 @@ export class Player extends ex.Actor {
         this.actions.clearActions()
         this.x = this.prev.x
         this.y = this.prev.y
-        this.next = { ...this.prev }
-        this.endMove()
     }
 
     setPos = (startpos: number, x: number, y: number) => {
         this.startpos = startpos
         this.x = this.startpos + x * TILE;
         this.y = TILE + y * TILE;
-        this.next = { x: this.x, y: this.y }
         this.prev = { x: this.x, y: this.y }
     }
 
@@ -92,14 +81,13 @@ export class Player extends ex.Actor {
         if (x < 0) this.setDrawing('left')
         if (x > 0) this.setDrawing('right')
 
-        this.prev = { ...this.next }
-        this.next = { x: this.next.x + x * TILE, y: this.next.y + y * TILE }
+        this.prev = { x: this.x, y: this.y }
 
-        const contex = this.actions.moveTo(this.next.x, this.next.y, 500).asPromise()
+        setTimeout(_ => {
+            this.x = this.x + x * TILE
+            this.y = this.y + y * TILE
+        }, 0)
 
-        contex.then(_ => {
-            this.prev = { ...this.next }
-            this.endMove()
-        })
+        setTimeout(_ => this.moving = false, 100)
     }
 }
