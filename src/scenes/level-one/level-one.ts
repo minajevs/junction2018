@@ -11,7 +11,9 @@ import { flatten } from "lodash"
 
 export class LevelOne extends Level {
   public onInitialize(engine: ex.Engine) { }
-  public onActivate() { }
+  public onActivate() {
+    this.setPlayers(1, 1, 4, 4)
+  }
   public onDeactivate() { }
 
   constructor(playerA: Player, playerB: Player) {

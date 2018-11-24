@@ -55,7 +55,7 @@ export class Player extends ex.Actor {
     }
 
     move = (event: ex.Input.KeyEvent) => {
-        this.setZIndex(100)
+        this.setZIndex(1000)
         const x = event.key === Keys.A
             ? -1
             : event.key === Keys.D

@@ -26,7 +26,7 @@ let levelOne = new LevelOne(playerA, playerB)
 
 const level1 = new Level1(playerA, playerB)
 
-let level = level1
+let level = levelOne
 
 game.input.keyboard.on('press',
   event => {
@@ -44,7 +44,7 @@ game.input.keyboard.on('press',
   })
 
 game.add('levelOne', levelOne);
-game.add('level1', level1);
+// game.add('level1', level1);
 
 let loader = new ex.Loader();
 for (let key in Resources) {
@@ -52,5 +52,5 @@ for (let key in Resources) {
 }
 
 game.start(loader).then(() => {
-  game.goToScene('level1');
+  game.goToScene('levelOne');
 });

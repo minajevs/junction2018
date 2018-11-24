@@ -22,6 +22,11 @@ export class Level extends ex.Scene {
         this.playerB = playerB
         this.objectA = objectsA
         this.objectB = objectsB
+    }
+
+    setPlayers = (xa: number, ya: number, xb: number, yb: number) => {
+        this.playerA.setPos(xa, ya)
+        this.playerB.setPos(xb, yb)
 
         this.on("changePlayer", _ => {
             this.aActive = !this.aActive
@@ -29,11 +34,6 @@ export class Level extends ex.Scene {
         })
 
         this.switchType(this.aActive)
-    }
-
-    setPlayers = (xa: number, ya: number, xb: number, yb: number) => {
-        this.playerA.setPos(xa, ya)
-        this.playerB.setPos(xb, yb)
     }
 
     private clear = () => {
