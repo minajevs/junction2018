@@ -3,6 +3,7 @@ import { Keys } from 'excalibur/dist/Input';
 import { WallTile } from '../wall/wallTile';
 import { Resources } from '../../resources';
 import { Door } from '../door/door';
+import { globalEvents } from '../..';
 
 const TILE = 48
 
@@ -59,6 +60,11 @@ this.add(emitter)
         });
     }
 
+    endMove = () => {
+        this.moving = false
+        globalEvents.emit('endMove')
+    }
+
     toggle = (flag: boolean) => {
         this.setDrawing(flag ? "default" : "hidden")
     }
@@ -68,7 +74,7 @@ this.add(emitter)
         this.x = this.prev.x
         this.y = this.prev.y
         this.next = { ...this.prev }
-        this.moving = false
+        this.endMove()
     }
 
     setPos = (x: number, y: number) => {
@@ -101,7 +107,7 @@ this.add(emitter)
 
         contex.then(_ => {
             this.prev = { ...this.next }
-            this.moving = false
+            this.endMove()
         })
     }
 }
