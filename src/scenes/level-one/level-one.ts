@@ -33,8 +33,8 @@ export class LevelOne extends Level {
 
     const finish = new Finish(4, 4, playerA, playerB)
 
-    const objectsA = [...wall1, ...wall2, ...borders, ...buttons, ...flatten(doors), finish]
-    const objectsB = [...wall3, ...borders, finish]
+    const objectsA = [...wall1, ...wall2, ...borders, ...buttons, finish]
+    const objectsB = [...wall3, ...borders, ...flatten(doors), finish]
 
     super(playerA, playerB, objectsA, objectsB)
   }
