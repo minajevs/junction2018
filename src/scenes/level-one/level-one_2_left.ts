@@ -93,7 +93,6 @@ const mapB = [
 
 export class LevelTwo extends Level {
   dog1: Sobaka
-  suchka: Sobaka
   public onInitialize(engine: ex.Engine) { }
   public onActivate() {
     const offsetx = this.engine.getWorldBounds().right / 2 + 24 - mapA[0].length / 2 * 48
@@ -176,10 +175,11 @@ export class LevelTwo extends Level {
     const finish = new Finish(offsetx, 12, 12, playerA, playerB)
 
     const dog1 = new Sobaka(offsetx, 4, 12, true)
+    dog1.guljatj(new Vector(9, 12), 100)
     // const suchka = new Sobaka(1, 5, false)
 
     // suchka.guljatj(new Vector(2, 10), 100)
-    const objectsA = [...mapATiles, ...buttonsAVertical, ...buttonsAHorizontal, ...flatten(doorsBHorizontal), ...flatten(doorsBVertical), /*zhuchka*/, finish]
+    const objectsA = [...mapATiles, ...buttonsAVertical, ...buttonsAHorizontal, ...flatten(doorsBHorizontal), ...flatten(doorsBVertical), dog1, finish]
     const objectsB = [...mapBTiles, ...buttonsBHorizontal, ...buttonsBVertical, ...flatten(doorsAVertical), ...flatten(doorsAHorizontal), /*suchka*/, finish]
 
     super(playerA, playerB, objectsA, objectsB, engine, timer)
@@ -187,7 +187,6 @@ export class LevelTwo extends Level {
     this.add(background)
 
     this.dog1 = dog1
-    this.dog1.guljatj(new Vector(9, 12), 100)
     // this.suchka = suchka
     //this.setPlayers(offsetx, 1, 1, 4, 4)
   }

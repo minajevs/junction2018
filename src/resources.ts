@@ -14,7 +14,7 @@ let Resources = {
     Door: new ex.Texture(door),
     Finish: new ex.Texture(finish),
 
-    Bg: new ex.Texture(bg),
+    Bg: new ex.Texture(sword),
     Controls: new ex.Texture(controls),
 }
 
