@@ -9,6 +9,7 @@ import { globalEvents } from '../..';
 import { player1particle, player2particle } from "../../particles"
 import { Player } from '../player/player';
 import { ChangeTypeEvent } from '../../scenes/level';
+import { Button } from '../button/button';
 
 const TILE = 48
 
@@ -44,6 +45,7 @@ export class Sobaka extends ex.Actor {
 
         this.on('collisionstart', (ev) => {
             if (ev.other instanceof Door && (ev.other as Door).opened) return
+            if (ev.other instanceof Button) return
 
             if (ev.other instanceof Player && ev.other.isA === isA)
                 globalEvents.emit('playerDeath')

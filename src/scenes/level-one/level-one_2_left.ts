@@ -93,13 +93,20 @@ const mapB = [
 
 export class LevelTwo extends Level {
   dog1: Sobaka
+  dog2: Sobaka
+  dog3: Sobaka
+  dog4: Sobaka
+  dog5: Sobaka
   public onInitialize(engine: ex.Engine) { }
   public onActivate() {
     const offsetx = this.engine.getWorldBounds().right / 2 + 24 - mapA[0].length / 2 * 48
     this.setPlayers(offsetx, 4, 10, 4, 4)
 
     this.dog1.setPos(offsetx, 4, 12, new Vector(9, 12))
-    // this.suchka.setPos(offsetx, 1, 5, new Vector(1, 10))
+    this.dog2.setPos(offsetx, 1, 1, new Vector(10, 1))
+    this.dog3.setPos(offsetx, 10, 5, new Vector(12, 5))
+    this.dog3.setPos(offsetx, 10, 7, new Vector(12, 7))
+    this.dog3.setPos(offsetx, 10, 9, new Vector(12, 9))
   }
   public onDeactivate() { }
 
@@ -176,18 +183,27 @@ export class LevelTwo extends Level {
 
     const dog1 = new Sobaka(offsetx, 4, 12, true)
     dog1.guljatj(new Vector(9, 13), 100)
+    const dog2 = new Sobaka(offsetx, 1, 1, true)
+    dog2.guljatj(new Vector(10, 2), 100)
+    const dog3 = new Sobaka(offsetx, 10, 5, false)
+    dog3.guljatj(new Vector(12, 6), 200)
+    const dog4 = new Sobaka(offsetx, 10, 7, false)
+    dog4.guljatj(new Vector(12, 8), 300)
+    const dog5 = new Sobaka(offsetx, 10, 9, false)
+    dog5.guljatj(new Vector(12, 10), 400)
 
-    // const suchka = new Sobaka(1, 5, false)
-
-    // suchka.guljatj(new Vector(2, 10), 100)
-    const objectsA = [timer, ...mapATiles, ...buttonsAVertical, ...buttonsAHorizontal, ...flatten(doorsBHorizontal), ...flatten(doorsBVertical), dog1, finish]
-    const objectsB = [timer, ...mapBTiles, ...buttonsBHorizontal, ...buttonsBVertical, ...flatten(doorsAVertical), ...flatten(doorsAHorizontal), /*suchka*/, finish]
+    const objectsA = [timer, ...mapATiles, ...buttonsAVertical, ...buttonsAHorizontal, ...flatten(doorsBHorizontal), ...flatten(doorsBVertical), dog1, dog2, finish]
+    const objectsB = [timer, ...mapBTiles, ...buttonsBHorizontal, ...buttonsBVertical, ...flatten(doorsAVertical), ...flatten(doorsAHorizontal), dog3, dog4, dog5, finish]
 
     super(playerA, playerB, objectsA, objectsB, engine)
 
     this.add(background)
 
     this.dog1 = dog1
+    this.dog2 = dog2
+    this.dog3 = dog3
+    this.dog4 = dog4
+    this.dog5 = dog5
     // this.suchka = suchka
     //this.setPlayers(offsetx, 1, 1, 4, 4)
   }

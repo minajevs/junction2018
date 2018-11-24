@@ -1,4 +1,5 @@
 import * as ex from 'excalibur';
+import { Sobaka } from '../sobaka/sobaka';
 
 const TILE = 48
 
@@ -23,6 +24,8 @@ export class Button extends ex.Actor {
     }
 
     onCollisionStart(ev) {
+        if (ev.other instanceof Sobaka) return
+
         const col = this.collides(ev.other)
         if (col === null || Math.abs(col.x) < 5 && Math.abs(col.y) < 5) return
 
@@ -42,6 +45,8 @@ export class Button extends ex.Actor {
 
     onCollisionEnd(ev) {
         setTimeout(_ => {
+            if (ev.other instanceof Sobaka) return
+
             if (this.collides(ev.other)) return
             this.actors.forEach(actor => {
                 const toggle = (actor as any).toggle
