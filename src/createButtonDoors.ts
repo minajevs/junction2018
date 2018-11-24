@@ -26,8 +26,8 @@ export const createButtonDoors = (startpos: number, buttonCoords: coords, doorsC
         ? MagentaResources.doorHorizontalOpen
         : CyanResources.doorHorizontalOpen
       : !isA
-        ? MagentaResources.doorHorizontalOpen
-        : CyanResources.doorHorizontalOpen,
+        ? MagentaResources.doorVerticalOpen
+        : CyanResources.doorVerticalOpen,
   ))
   const button = new Button(
     startpos,
