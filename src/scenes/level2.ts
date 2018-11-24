@@ -63,11 +63,11 @@ const mapA = [
   [mtb, mtb, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', mtb],
   [mtb, mtr, ' ', mlr, mlr, mlr, mlr, mtd, mlr, mer, ' ', mtb],
   [mtb, mtb, ' ', ' ', ' ', ' ', ' ', mtb, ' ', ' ', ' ', mtb],
-  [mtb, mlb, mtd, mlr, mtd, mlr, mlr, mtl, ' ', mel, mer, mtb],
+  [mtb, mlb, mtd, mlr, mtd, mlr, mlr, mtl, ' ', mel, mlr, mtl],
   [mtr, mlr, mcc, mlr, mtl, ' ', ' ', mtb, ' ', ' ', ' ', mtb],
   [mtb, ' ', mtb, ' ', mtr, mer, ' ', mlb, mlr, mer, ' ', mtb],
   [mtb, ' ', mtb, ' ', mtb, ' ', ' ', ' ', ' ', ' ', ' ', mtb],
-  [mtb, ' ', med, ' ', med, ' ', mel, mlr, mlr, mlr, mer, mtb],
+  [mtb, ' ', med, ' ', med, ' ', mel, mlr, mlr, mlr, mlr, mtl],
   [mtb, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', mtb],
   [mlb, mlr, mlr, mlr, mlr, mlr, mlr, mlr, mlr, mlr, mlr, mrb]
 ]
