@@ -58,37 +58,33 @@ const {
 } = CyanResources
 
 const mapA = [
-  [mlt, mlr, mlr, mlr, mlr, mlr, mlr, mlr, mlr, mlr, mlr, mlr, mlr, mlr, mrt],
-  [mtb, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', mtb],
-  [mtb, ' ', ' ', ' ', ' ', mlt, mrt, ' ', ' ', ' ', ' ', ' ', ' ', ' ', mtb],
-  [mtb, ' ', ' ', ' ', ' ', mtr, mtl, ' ', ' ', ' ', ' ', ' ', ' ', ' ', mtb],
-  [mtb, ' ', ' ', ' ', ' ', mtb, mtb, ' ', ' ', ' ', ' ', ' ', ' ', ' ', mtb],
-  [mtb, ' ', ' ', ' ', ' ', mtb, mtb, ' ', ' ', ' ', ' ', ' ', ' ', ' ', mtb],
-  [mtb, ' ', ' ', ' ', ' ', mtb, mtb, ' ', ' ', ' ', ' ', ' ', ' ', ' ', mtb],
-  [mtb, ' ', ' ', ' ', ' ', mtb, mtb, ' ', ' ', ' ', ' ', ' ', ' ', ' ', mtb],
-  [mtb, ' ', ' ', ' ', ' ', mtb, mtb, ' ', ' ', ' ', ' ', ' ', ' ', ' ', mtb],
-  [mtb, ' ', ' ', ' ', ' ', mtr, mtl, ' ', ' ', ' ', ' ', ' ', ' ', ' ', mtb],
-  [mtb, ' ', ' ', ' ', mlt, mtl, mtr, mrt, ' ', ' ', ' ', ' ', ' ', ' ', mtb],
-  [mtb, ' ', ' ', ' ', mlb, mrb, mlb, mrb, ' ', ' ', ' ', ' ', ' ', ' ', mtb],
-  [mtb, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', mtb],
-  [mlb, mlr, mlr, mlr, mlr, mlr, mlr, mlr, mlr, mlr, mlr, mlr, mlr, mlr, mrb]
+  [mlt, mlr, mlr, mlr, mlr, mlr, mlr, mlr, mlr, mlr, mtd, mrt],
+  [mtb, mlt, mlr, mlr, mlr, mlr, mlr, mlr, mlr, mlr, mrb, mtb],
+  [mtb, mtb, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', mtb],
+  [mtb, mtr, ' ', mlr, mlr, mlr, mlr, mtd, mlr, mer, ' ', mtb],
+  [mtb, mtb, ' ', ' ', ' ', ' ', ' ', mtb, ' ', ' ', ' ', mtb],
+  [mtb, mlb, mtd, mlr, mtd, mlr, mlr, mtl, ' ', mel, mer, mtb],
+  [mtr, mlr, mcc, mlr, mtl, ' ', ' ', mtb, ' ', ' ', ' ', mtb],
+  [mtb, ' ', mtb, ' ', mtr, mer, ' ', mlb, mlr, mer, ' ', mtb],
+  [mtb, ' ', mtb, ' ', mtb, ' ', ' ', ' ', ' ', ' ', ' ', mtb],
+  [mtb, ' ', med, ' ', med, ' ', mel, mlr, mlr, mlr, mer, mtb],
+  [mtb, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', mtb],
+  [mlb, mlr, mlr, mlr, mlr, mlr, mlr, mlr, mlr, mlr, mlr, mrb]
 ]
 
 const mapB = [
-  [clt, clr, clr, clr, clr, clr, clr, clr, clr, clr, clr, clr, clr, clr, crt],
-  [ctb, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ctb],
-  [ctb, ' ', ' ', ' ', ' ', clt, clr, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ctb],
-  [ctb, ' ', ' ', ' ', ' ', ctr, ctl, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ctb],
-  [ctb, ' ', ' ', ' ', ' ', ctb, ctb, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ctb],
-  [ctb, ' ', ' ', ' ', ' ', ctb, ctb, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ctb],
-  [ctb, ' ', ' ', ' ', ' ', ctb, ctb, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ctb],
-  [ctb, ' ', ' ', ' ', ' ', ctb, ctb, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ctb],
-  [ctb, ' ', ' ', ' ', ' ', ctb, ctb, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ctb],
-  [ctb, ' ', ' ', ' ', ' ', ctr, ctl, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ctb],
-  [ctb, ' ', ' ', ' ', clt, ctl, ctr, crt, ' ', ' ', ' ', ' ', ' ', ' ', ctb],
-  [ctb, ' ', ' ', ' ', clb, crb, clb, crb, ' ', ' ', ' ', ' ', ' ', ' ', ctb],
-  [ctb, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ctb],
-  [clb, clr, clr, clr, clr, clr, clr, clr, clr, clr, clr, clr, clr, clr, crb]
+  [clt, clr, clr, clr, clr, clr, clr, clr, clr, clr, clr, crt],
+  [ctb, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ctb],
+  [ctr, clr, clr, clr, crt, ' ', clt, clr, clr, clr, clr, ctl],
+  [ctb, ' ', ' ', ' ', ctb, ' ', ctb, ' ', ' ', ' ', ' ', ctb],
+  [ctb, ' ', cet, ' ', ctb, ' ', ced, ' ', clt, cer, ' ', ctb],
+  [ctb, ' ', ctb, ' ', ctb, ' ', ' ', ' ', ctb, ' ', ' ', ctb],
+  [ctr, ' ', ctl, ' ', ctr, clr, clr, clr, ctt, cer, ' ', ctb],
+  [ctb, ' ', ctb, ' ', ctb, ' ', ' ', ' ', ' ', ' ', ' ', ctb],
+  [ctr, clr, crb, ' ', ctr, cer, ' ', cel, clr, cer, ' ', ctb],
+  [ctb, ' ', ' ', ' ', ced, ' ', ' ', ' ', ' ', ' ', ' ', ctb],
+  [ctb, ' ', cet, ' ', ' ', ' ', cet, ' ', cet, ' ', clt, ctl],
+  [clb, clr, ctt, clr, clr, clr, ctt, clr, ctt, clr, ctt, crb]
 ]
 
 export class LevelOne extends Level {
@@ -97,7 +93,7 @@ export class LevelOne extends Level {
   public onInitialize(engine: ex.Engine) { }
   public onActivate() {
     const offsetx = this.engine.getWorldBounds().right / 2 + 24 - mapA[0].length / 2 * 48
-    this.setPlayers(offsetx, 1, 1, 4, 4)
+    this.setPlayers(offsetx, 6, 4, 1, 5)
 
     this.zhuchka.setPos(offsetx, 5, 1, new Vector(10, 2))
     this.suchka.setPos(offsetx, 1, 5, new Vector(1, 10))
@@ -108,38 +104,54 @@ export class LevelOne extends Level {
     const offsetx = engine.getWorldBounds().right / 2 + 24 - mapA[0].length / 2 * 48
     const mapATiles = createWalls(offsetx, mapA)
     const mapBTiles = createWalls(offsetx, mapB)
-    const buttonsDoorsCoords = [
+    const buttonsDoorsCoordsA = [
       {
-        button: { x: 2, y: 2 },
-        doors: [{ x: 7, y: 4 }, { x: 6, y: 6 }]
+        button: { x: 3, y: 7 },
+        doors: [{ x: 1, y: 6 }]
       }
     ]
 
-    const buttonsDoors = buttonsDoorsCoords.map(buttonsDoorsCoord => createButtonDoors(
+    const buttonsDoorsCoordsB = [
+      {
+        button: { x: 9, y: 1 },
+        doors: [{ x: 2, y: 3 }]
+      }
+    ]
+
+    const buttonsDoorsA = buttonsDoorsCoordsA.map(buttonsDoorsCoord => createButtonDoors(
       offsetx,
       buttonsDoorsCoord.button,
       buttonsDoorsCoord.doors[0],
       true, true))
-    const buttons = buttonsDoors.map(item => item.button)
-    const doors = buttonsDoors.map(item => item.doors)
+    const buttonsA = buttonsDoorsA.map(item => item.button)
+    const doorsA = buttonsDoorsA.map(item => item.doors)
 
-    const finish = new Finish(offsetx, 4, 4, playerA, playerB)
+    const buttonsDoorsB = buttonsDoorsCoordsB.map(buttonsDoorsCoord => createButtonDoors(
+      offsetx,
+      buttonsDoorsCoord.button,
+      buttonsDoorsCoord.doors[0],
+      true, false))
+    const buttonsB = buttonsDoorsB.map(item => item.button)
+    const doorsB = buttonsDoorsB.map(item => item.doors)
 
-    const zhuchka = new Sobaka(offsetx, 5, 1, true)
-    const suchka = new Sobaka(offsetx, 1, 5, false)
 
-    zhuchka.guljatj(new Vector(10, 2), 100)
-    suchka.guljatj(new Vector(1, 10), 100)
+    const finish = new Finish(offsetx, 1, 7, playerA, playerB)
 
-    const objectsA = [...mapATiles, ...buttons, zhuchka, finish]
-    const objectsB = [...mapBTiles, ...flatten(doors), suchka, finish]
+    // const zhuchka = new Sobaka(5, 1, true)
+    // const suchka = new Sobaka(1, 5, false)
+
+    // zhuchka.guljatj(new Vector(10, 2), 100)
+    // suchka.guljatj(new Vector(2, 10), 100)
+
+    const objectsA = [...mapATiles, ...buttonsA, ...flatten(doorsB), /*zhuchka*/, finish]
+    const objectsB = [...mapBTiles, ...buttonsB, ...flatten(doorsA), /*suchka*/, finish]
 
     super(playerA, playerB, objectsA, objectsB, engine, timer)
 
     this.add(background)
 
-    this.zhuchka = zhuchka
-    this.suchka = suchka
+    // this.zhuchka = zhuchka
+    // this.suchka = suchka
     //this.setPlayers(offsetx, 1, 1, 4, 4)
   }
 }
