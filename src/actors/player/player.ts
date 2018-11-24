@@ -6,6 +6,7 @@ import { MagentaResources } from '../../magentaResources';
 import { CyanResources } from '../../cyanResources';
 import { Door } from '../door/door';
 import { globalEvents } from '../..';
+import { player1particle, player2particle } from "../../particles"
 
 const TILE = 48
 
@@ -33,6 +34,7 @@ export class Player extends ex.Actor {
         this.addDrawing("hidden", Resources.Empty.asSprite())
         this.setDrawing("left")
         this.toggle(true)
+        this.add(!isA ? player1particle : player2particle)
 
         this.on('collisionstart', (ev) => {
             if (!this.collidable.some(collidableObject => ev.other instanceof collidableObject)) return
