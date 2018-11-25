@@ -33,6 +33,7 @@ function msToTime(duration: number) {
 
 export class ScoreTime extends ex.Label {
     time: number
+    interval: number
     constructor(engine: ex.Engine) {
         super('0:00', engine.getWorldBounds().right - 100, 100)
         this.time = 0
@@ -41,7 +42,7 @@ export class ScoreTime extends ex.Label {
         this.color = ex.Color.White
         this.textAlign = ex.TextAlign.Right
 
-        setInterval(_ => {
+        this.interval = window.setInterval(_ => {
             this.time++
             this.text = msToTime(this.time)
         }, 100)
@@ -51,5 +52,13 @@ export class ScoreTime extends ex.Label {
     setTime = (time: number) => {
         this.time = time
         this.text = msToTime(this.time)
+    }
+
+    getTime = () => {
+        return msToTime(this.time)
+    }
+
+    stopTime = () => {
+        window.clearInterval(this.interval)
     }
 }
