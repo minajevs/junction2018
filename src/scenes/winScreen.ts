@@ -140,4 +140,5 @@ export class WinScreen extends ex.Scene {
         this.scoreLabel.color = aActive ? ex.Color.fromHex('ED1B7B') : ex.Color.Cyan
         this.continue.color = aActive ? ex.Color.fromHex('ED1B7B') : ex.Color.Cyan
     }
+    showDeathParticle = (x: number, y: number, isA: boolean) => { }
 }
