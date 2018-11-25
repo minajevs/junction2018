@@ -6,17 +6,29 @@ import { Resources } from '../resources';
 import { Button } from "../actors/button/button"
 import { Door } from "../actors/door/door"
 import { Finish } from '../actors/finish/finish';
-import { Label, Vector } from 'excalibur';
+import { Label, Vector, Timer } from 'excalibur';
 import { createBg } from './createbg';
+import { ScoreTime } from '../actors/timer';
 
 export class Menu extends ex.Scene {
     public onInitialize(engine: ex.Engine) { }
-    public onActivate() { }
+    public onActivate() {
+        this.engine.input.pointers.primary.on("down", (asd) => {
+            console.log(asd)
+            // Mouse click
+            this.engine.input.pointers.primary.off("down");
+            //timer.setTime(0)
+            this.timer.setTime(0)
+            this.engine.goToScene('level0');
+        });
+    }
     public onDeactivate() { }
 
-    constructor(engine: ex.Engine) {
-        super();
+    timer: ScoreTime
 
+    constructor(engine: ex.Engine, timer: ScoreTime) {
+        super();
+        this.timer = timer
         const label = new ex.Label(
             "Click to start!",
             engine.getWorldBounds().right / 2,
