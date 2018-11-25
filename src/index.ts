@@ -68,7 +68,8 @@ levels.forEach((level, i) => game.addScene(`level${i}`, level))
 /* 
   Register controls
 */
-game.input.pointers.primary.on("down", () => {
+game.input.pointers.primary.on("down", (asd) => {
+  console.log(asd)
   // Mouse click
   game.input.pointers.primary.off("down");
   //timer.setTime(0)

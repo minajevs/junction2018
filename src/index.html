@@ -214,6 +214,21 @@
             animation: blue-me 3s infinite;
             background: #171DA8;
         }
+
+        #sound-play {
+            position: absolute;
+    top: 50px;
+    left: 80px;
+    background: transparent;
+    border: none;
+    z-index: 100;
+    width: 125px;
+    height: 107px;
+        }
+
+        #sound-play img {
+            max-width: 100%;
+        }
     </style>
 </head>
 
@@ -236,7 +251,33 @@
         </div>
 
     </div>
-    <audio src="./NormalnoDolbit.mp3" loop autoplay></audio>
+    <button id="sound-play">
+        <img src="https://i.imgur.com/SgeKSlK.png" alt="Enable sound" id="sound-img">
+    </button>
+    <audio src="./NormalnoDolbit.mp3" loop id="sound"></audio>
 </body>
+
+<script>
+    window.onload = function() {
+        var button = document.getElementById("sound-play")
+        var player = document.getElementById("sound")
+        var imag = document.getElementById("sound-img")
+
+        button.addEventListener("click", function(e) {
+            event.preventDefault()
+
+            if (button.classList.contains("on")) {
+                player.pause()
+                button.classList.remove("on")
+                button.classList.add("off")
+                imag.src = "https://i.imgur.com/SgeKSlK.png"
+            } else {
+                player.play()
+                button.classList.add("on")
+                imag.src = "https://i.imgur.com/pimuG5q.png"
+            }
+        })
+    }
+</script>
 
 </html>
