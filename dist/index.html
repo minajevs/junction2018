@@ -217,13 +217,13 @@
 
         #sound-play {
             position: absolute;
-            top: 50px;
-            left: 80px;
-            background: transparent;
-            border: none;
-            z-index: 100;
-            width: 125px;
-            height: 107px;
+    top: 50px;
+    left: 80px;
+    background: transparent;
+    border: none;
+    z-index: 100;
+    width: 125px;
+    height: 107px;
         }
 
         #sound-play img {
@@ -255,15 +255,15 @@
         <img src="https://i.imgur.com/SgeKSlK.png" alt="Enable sound" id="sound-img">
     </button>
     <audio src="./NormalnoDolbit.mp3" loop id="sound"></audio>
-</body>
+<script type="text/javascript" src="vendors~main.js"></script><script type="text/javascript" src="main.js"></script></body>
 
 <script>
-    window.onload = function () {
+    window.onload = function() {
         var button = document.getElementById("sound-play")
         var player = document.getElementById("sound")
         var imag = document.getElementById("sound-img")
 
-        button.addEventListener("click", function (event) {
+        button.addEventListener("click", function(e) {
             event.preventDefault()
 
             if (button.classList.contains("on")) {
