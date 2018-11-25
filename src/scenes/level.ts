@@ -20,8 +20,6 @@ export class Level extends ex.Scene {
     public onInitialize(engine: ex.Engine) {
     }
     public onActivate() {
-        this.playerA.opacity = 0
-        this.playerA.actions.fade(1, 250)
     }
     public onDeactivate() { }
 

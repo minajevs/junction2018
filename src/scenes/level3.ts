@@ -100,7 +100,6 @@ export class LevelThree extends Level {
   dog5: Sobaka
   public onInitialize(engine: ex.Engine) { }
   public onActivate() {
-    super.onActivate()
     const offsetx = Math.round(this.engine.getWorldBounds().right / 2 + 24 - mapA[0].length / 2 * 48)
     const offsety = Math.round(this.engine.getWorldBounds().bottom / 2 + 24 - mapA.length / 2 * 48)
     this.setPlayers(offsetx, offsety, 4, 10, 4, 4)
