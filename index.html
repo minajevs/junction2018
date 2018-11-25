@@ -217,13 +217,13 @@
 
         #sound-play {
             position: absolute;
-    top: 50px;
-    left: 80px;
-    background: transparent;
-    border: none;
-    z-index: 100;
-    width: 125px;
-    height: 107px;
+            top: 50px;
+            left: 80px;
+            background: transparent;
+            border: none;
+            z-index: 100;
+            width: 125px;
+            height: 107px;
         }
 
         #sound-play img {
@@ -258,12 +258,12 @@
 <script type="text/javascript" src="vendors~main.js"></script><script type="text/javascript" src="main.js"></script></body>
 
 <script>
-    window.onload = function() {
+    window.onload = function () {
         var button = document.getElementById("sound-play")
         var player = document.getElementById("sound")
         var imag = document.getElementById("sound-img")
 
-        button.addEventListener("click", function(e) {
+        button.addEventListener("click", function (event) {
             event.preventDefault()
 
             if (button.classList.contains("on")) {
