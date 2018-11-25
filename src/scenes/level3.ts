@@ -109,6 +109,7 @@ export class LevelThree extends Level {
     this.dog3.setPos(offsetx, offsety, 10, 5, new Vector(12, 5))
     this.dog3.setPos(offsetx, offsety, 10, 7, new Vector(12, 7))
     this.dog3.setPos(offsetx, offsety, 10, 9, new Vector(12, 9))
+    this.showLevelNumber(3);
   }
   public onDeactivate() { this.game.controlsActive = false }
 

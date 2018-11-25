@@ -85,14 +85,13 @@ const mapB = [
 ]
 
 export class LevelOne extends Level {
-    zhuchka: Sobaka
-    suchka: Sobaka
     public onInitialize(engine: ex.Engine) { }
     public onActivate() {
         const offsetx = Math.round(this.engine.getWorldBounds().right / 2 + 24 - mapA[0].length / 2 * 48)
         const offsety = Math.round(this.engine.getWorldBounds().bottom / 2 + 24 - mapA.length / 2 * 48)
         this.setPlayers(offsetx, offsety, 1, 7, 8, 7)
         this.game.controlsActive = true
+        this.showLevelNumber(1)
     }
     public onDeactivate() { }
 
@@ -101,7 +100,6 @@ export class LevelOne extends Level {
         const offsety = Math.round(engine.getWorldBounds().bottom / 2 + 24 - mapA.length / 2 * 48)
         const mapATiles = createWalls(offsetx, offsety, mapA, true)
         const mapBTiles = createWalls(offsetx, offsety, mapB, false)
-
 
         const finish = new Finish(offsetx, offsety, 5, 1, playerA, playerB)
 
