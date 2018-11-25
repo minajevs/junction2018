@@ -6,33 +6,33 @@ export const createWall = (x: number, y: number, w: number, h: number, texture: 
     let tiles = []
     for (let ix = 0; ix < w; ix++) {
         for (let iy = 0; iy < h; iy++) {
-            const wallTile = new WallTile(0, x + ix, y + iy, texture, isA)
+            const wallTile = new WallTile(0, 0, x + ix, y + iy, texture, isA)
             tiles.push(wallTile)
         }
     }
     return tiles
 }
 
-export const createWalls = (startpos: number, wallsConfig: (ex.Texture | string)[][], isA: boolean) => {
+export const createWalls = (startpos: number, startposy: number, wallsConfig: (ex.Texture | string)[][], isA: boolean) => {
     const walls: WallTile[] = []
     wallsConfig.forEach((row, y) => {
         row.forEach((col, x) => {
             const tile = wallsConfig[y][x]
             if (typeof tile === 'string') { }
             else
-                walls.push(new WallTile(startpos, x, y, tile, isA))
+                walls.push(new WallTile(startpos, startposy, x, y, tile, isA))
         })
     })
 
     return walls
 }
 
-export const createBorders = (startpos: number, sidex: number, sidey: number, texture: ex.Texture, isA: boolean): WallTile[] => {
+export const createBorders = (startpos: number, startposy: number, sidex: number, sidey: number, texture: ex.Texture, isA: boolean): WallTile[] => {
     let tiles = []
-    const leftTop = new WallTile(startpos, 0, 0, MagentaResources.leftTop, isA)
-    const leftBottom = new WallTile(startpos, 0, sidey - 1, MagentaResources.leftBottom, isA)
-    const rightTop = new WallTile(startpos, sidex - 1, 0, MagentaResources.rightTop, isA)
-    const rightBottom = new WallTile(startpos, sidex - 1, sidey - 1, MagentaResources.rightBottom, isA)
+    const leftTop = new WallTile(startpos, startposy, 0, 0, MagentaResources.leftTop, isA)
+    const leftBottom = new WallTile(startpos, startposy, 0, sidey - 1, MagentaResources.leftBottom, isA)
+    const rightTop = new WallTile(startpos, startposy, sidex - 1, 0, MagentaResources.rightTop, isA)
+    const rightBottom = new WallTile(startpos, startposy, sidex - 1, sidey - 1, MagentaResources.rightBottom, isA)
 
     const leftWall = createWall(0, 1, 1, sidey - 2, MagentaResources.topDown, isA)
     const topWall = createWall(1, 0, sidex - 2, 1, MagentaResources.leftRight, isA)

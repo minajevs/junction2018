@@ -12,14 +12,14 @@ export class Finish extends ex.Actor {
     private playerA: Player
     private playerB: Player
 
-    constructor(startpos: number, tx: number, ty: number, playerA: Player, playerB: Player) {
+    constructor(startpos: number, startposy: number, tx: number, ty: number, playerA: Player, playerB: Player) {
         super();
         this.setWidth(TILE);
         this.setHeight(TILE);
         this.playerA = playerA
         this.playerB = playerB
         this.x = startpos + tx * TILE;
-        this.y = 48 + ty * TILE;
+        this.y = startposy + ty * TILE;
         this.color = new ex.Color(255, 255, 255);
         this.collisionType = ex.CollisionType.Passive;
 

@@ -15,6 +15,7 @@ export class Player extends ex.Actor {
     private collidable = [WallTile, Door]
     moving: boolean
     startpos: number
+    startposy: number
     isA: boolean
 
     constructor(tx: number, ty: number, isA: boolean) {
@@ -37,12 +38,13 @@ export class Player extends ex.Actor {
         this.toggle(true)
         this.add(!isA ? player1particle : player2particle)
 
-        this.on('collisionstart', (ev) => {
+        this.on('precollision', (ev) => {
             if (!this.collidable.some(collidableObject => ev.other instanceof collidableObject)) return
             if (ev.other instanceof Door && (ev.other as Door).opened) return
 
             if (ev.other instanceof WallTile && ev.other.isA !== this.isA) return
 
+            console.log('cancel', this.x, this.y, ev.other.x, ev.other.y)
             this.cancelMove()
         });
     }
@@ -52,15 +54,15 @@ export class Player extends ex.Actor {
     }
 
     cancelMove = () => {
-        console.log('cancel', this.isA ? 'A' : 'B')
         this.x = this.prev.x
         this.y = this.prev.y
     }
 
-    setPos = (startpos: number, x: number, y: number) => {
+    setPos = (startpos: number, startposy: number, x: number, y: number) => {
         this.startpos = startpos
+        this.startposy = startposy
         this.x = this.startpos + x * TILE;
-        this.y = TILE + y * TILE;
+        this.y = this.startposy + y * TILE;
         this.prev = { x: this.x, y: this.y }
     }
 

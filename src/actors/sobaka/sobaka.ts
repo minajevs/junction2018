@@ -23,19 +23,21 @@ export class Sobaka extends ex.Actor {
     isA: boolean
     hidden: boolean
     startpos: number
+    startposy: number
 
-    constructor(startpos: number, tx: number, ty: number, isA: boolean) {
+    constructor(startpos: number, startposy: number, tx: number, ty: number, isA: boolean) {
         super();
         this.setWidth(TILE);
         this.setHeight(TILE);
         this.x = startpos + tx * TILE;
-        this.y = 48 + ty * TILE;
+        this.y = startposy + ty * TILE;
         this.next = { x: this.x, y: this.y }
         this.prev = { x: this.x, y: this.y }
         this.color = new ex.Color(255, 255, 255);
         this.collisionType = ex.CollisionType.Passive;
         this.isA = isA
         this.startpos = startpos
+        this.startposy = startposy
 
         this.addDrawing("left", isA ? MagentaResources.dogLeft.asSprite() : CyanResources.dogLeft.asSprite())
         this.addDrawing("right", isA ? MagentaResources.dogRight.asSprite() : CyanResources.dogRight.asSprite())
@@ -57,10 +59,11 @@ export class Sobaka extends ex.Actor {
         })
     }
 
-    setPos = (startpos: number, x: number, y: number, to: ex.Vector) => {
+    setPos = (startpos: number, startposy: number, x: number, y: number, to: ex.Vector) => {
         this.startpos = startpos
+        this.startposy = startposy
         this.x = this.startpos + (x * TILE)
-        this.y = 48 + y * TILE;
+        this.y = this.startposy + y * TILE;
         this.prev = new ex.Vector(this.x, this.y)
         if (this.hidden) return
         const deltax = this.x - (this.startpos + TILE * to.x)
@@ -79,7 +82,7 @@ export class Sobaka extends ex.Actor {
             })
             .moveTo(
                 this.startpos + to.x * TILE,
-                to.y * TILE,
+                this.startposy + to.y * TILE,
                 speed
             )
             .delay(10)

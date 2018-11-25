@@ -20,7 +20,7 @@ export class Menu extends ex.Scene {
         const label = new ex.Label(
             "Click to start!",
             engine.getWorldBounds().right / 2,
-            engine.getWorldBounds().top + 140
+            engine.getWorldBounds().top + 200
         )
 
         label.fontFamily = "'Press Start 2P'"
@@ -41,7 +41,7 @@ export class Menu extends ex.Scene {
 
         copyright.fontFamily = "'Press Start 2P'"
         copyright.fontSize = 10
-        copyright.color = ex.Color.Magenta
+        copyright.color = ex.Color.fromHex('ED1B7B')
         copyright.textAlign = ex.TextAlign.Center
 
         const controls = new ex.Actor(

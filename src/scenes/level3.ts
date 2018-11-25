@@ -100,21 +100,23 @@ export class LevelThree extends Level {
   dog5: Sobaka
   public onInitialize(engine: ex.Engine) { }
   public onActivate() {
-    const offsetx = this.engine.getWorldBounds().right / 2 + 24 - mapA[0].length / 2 * 48
-    this.setPlayers(offsetx, 4, 10, 4, 4)
+    const offsetx = Math.round(this.engine.getWorldBounds().right / 2 + 24 - mapA[0].length / 2 * 48)
+    const offsety = Math.round(this.engine.getWorldBounds().bottom / 2 + 24 - mapA.length / 2 * 48)
+    this.setPlayers(offsetx, offsety, 4, 10, 4, 4)
     this.game.controlsActive = true
-    this.dog1.setPos(offsetx, 4, 12, new Vector(9, 12))
-    this.dog2.setPos(offsetx, 1, 1, new Vector(10, 1))
-    this.dog3.setPos(offsetx, 10, 5, new Vector(12, 5))
-    this.dog3.setPos(offsetx, 10, 7, new Vector(12, 7))
-    this.dog3.setPos(offsetx, 10, 9, new Vector(12, 9))
+    this.dog1.setPos(offsetx, offsety, 4, 12, new Vector(9, 12))
+    this.dog2.setPos(offsetx, offsety, 1, 1, new Vector(10, 1))
+    this.dog3.setPos(offsetx, offsety, 10, 5, new Vector(12, 5))
+    this.dog3.setPos(offsetx, offsety, 10, 7, new Vector(12, 7))
+    this.dog3.setPos(offsetx, offsety, 10, 9, new Vector(12, 9))
   }
   public onDeactivate() { this.game.controlsActive = false }
 
-  constructor(playerA: Player, playerB: Player, engine: Game, timer: ex.Label) {
-    const offsetx = engine.getWorldBounds().right / 2 + 24 - mapA[0].length / 2 * 48
-    const mapATiles = createWalls(offsetx, mapA, true)
-    const mapBTiles = createWalls(offsetx, mapB, false)
+  constructor(playerA: Player, playerB: Player, engine: Game, timer: ex.Label, deathNote: ex.Label) {
+    const offsetx = Math.round(engine.getWorldBounds().right / 2 + 24 - mapA[0].length / 2 * 48)
+    const offsety = Math.round(engine.getWorldBounds().bottom / 2 + 24 - mapA.length / 2 * 48)
+    const mapATiles = createWalls(offsetx, offsety, mapA, true)
+    const mapBTiles = createWalls(offsetx, offsety, mapB, false)
     const buttonsDoorsCoordsA = [
       {
         button: { x: 1, y: 12 },
@@ -149,6 +151,7 @@ export class LevelThree extends Level {
 
     const buttonsDoorsAVertical = buttonsDoorsCoordsA.map(buttonsDoorsCoord => createButtonDoors(
       offsetx,
+      offsety,
       buttonsDoorsCoord.button,
       buttonsDoorsCoord.doors[0],
       false, true))
@@ -157,6 +160,7 @@ export class LevelThree extends Level {
 
     const buttonsDoorsAHorizontal = buttonsDoorsCoordsA2.map(buttonsDoorsCoord => createButtonDoors(
       offsetx,
+      offsety,
       buttonsDoorsCoord.button,
       buttonsDoorsCoord.doors[0],
       true, true))
@@ -165,6 +169,7 @@ export class LevelThree extends Level {
 
     const buttonsDoorsBHorizontal = buttonsDoorsCoordsB.map(buttonsDoorsCoord => createButtonDoors(
       offsetx,
+      offsety,
       buttonsDoorsCoord.button,
       buttonsDoorsCoord.doors[0],
       true, false))
@@ -173,6 +178,7 @@ export class LevelThree extends Level {
 
     const buttonsDoorsBVertical = buttonsDoorsCoordsB2.map(buttonsDoorsCoord => createButtonDoors(
       offsetx,
+      offsety,
       buttonsDoorsCoord.button,
       buttonsDoorsCoord.doors[0],
       false, false))
@@ -180,21 +186,21 @@ export class LevelThree extends Level {
     const doorsBVertical = buttonsDoorsBVertical.map(item => item.doors)
 
 
-    const finish = new Finish(offsetx, 12, 12, playerA, playerB)
+    const finish = new Finish(offsetx, offsety, 12, 12, playerA, playerB)
 
-    const dog1 = new Sobaka(offsetx, 4, 12, true)
-    dog1.guljatj(new Vector(9, 13), 100)
-    const dog2 = new Sobaka(offsetx, 1, 1, true)
-    dog2.guljatj(new Vector(10, 2), 100)
-    const dog3 = new Sobaka(offsetx, 10, 5, false)
-    dog3.guljatj(new Vector(12, 6), 200)
-    const dog4 = new Sobaka(offsetx, 10, 7, false)
-    dog4.guljatj(new Vector(12, 8), 300)
-    const dog5 = new Sobaka(offsetx, 10, 9, false)
-    dog5.guljatj(new Vector(12, 10), 400)
+    const dog1 = new Sobaka(offsetx, offsety, 4, 12, true)
+    dog1.guljatj(new Vector(9, 12), 100)
+    const dog2 = new Sobaka(offsetx, offsety, 1, 1, true)
+    dog2.guljatj(new Vector(10, 1), 100)
+    const dog3 = new Sobaka(offsetx, offsety, 10, 5, false)
+    dog3.guljatj(new Vector(12, 5), 200)
+    const dog4 = new Sobaka(offsetx, offsety, 10, 7, false)
+    dog4.guljatj(new Vector(12, 7), 300)
+    const dog5 = new Sobaka(offsetx, offsety, 10, 9, false)
+    dog5.guljatj(new Vector(12, 9), 400)
 
-    const objectsA = [timer, ...mapATiles, ...buttonsAVertical, ...buttonsAHorizontal, ...flatten(doorsBHorizontal), ...flatten(doorsBVertical), dog1, dog2, finish]
-    const objectsB = [timer, ...mapBTiles, ...buttonsBHorizontal, ...buttonsBVertical, ...flatten(doorsAVertical), ...flatten(doorsAHorizontal), dog3, dog4, dog5, finish]
+    const objectsA = [deathNote, timer, ...mapATiles, ...buttonsAVertical, ...buttonsAHorizontal, ...flatten(doorsBHorizontal), ...flatten(doorsBVertical), dog1, dog2, finish]
+    const objectsB = [deathNote, timer, ...mapBTiles, ...buttonsBHorizontal, ...buttonsBVertical, ...flatten(doorsAVertical), ...flatten(doorsAHorizontal), dog3, dog4, dog5, finish]
 
     super(playerA, playerB, objectsA, objectsB, engine)
 

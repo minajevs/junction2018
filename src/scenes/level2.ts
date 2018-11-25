@@ -70,7 +70,7 @@ const mapA = [
   [mtb, ' ', mtb, ' ', mtb, ' ', ' ', ' ', ' ', ' ', ' ', mtb],
   [mtb, ' ', med, ' ', med, ' ', mel, mlr, mlr, mlr, mlr, mtl],
   [mtb, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', mtb],
-  [mlb, mlr, mlr, mlr, mlr, mlr, mlr, mlr, mlr, mlr, mlr, mrb]
+  [mlb, mlr, mlr, mlr, mlr, mlr, mlr, mlr, mlr, mlr, mlr, mrb],
 ]
 
 const mapB = [
@@ -85,7 +85,7 @@ const mapB = [
   [ctr, clr, crb, ' ', ctr, cer, ' ', cel, clr, cer, ' ', ctb],
   [ctb, ' ', ' ', ' ', ced, ' ', ' ', ' ', ' ', ' ', ' ', ctb],
   [ctb, ' ', cet, ' ', ' ', ' ', cet, ' ', cet, ' ', clt, ctl],
-  [clb, clr, ctt, clr, clr, clr, ctt, clr, ctt, clr, ctt, crb]
+  [clb, clr, ctt, clr, clr, clr, ctt, clr, ctt, clr, ctt, crb],
 ]
 
 export class LevelTwo extends Level {
@@ -93,18 +93,20 @@ export class LevelTwo extends Level {
   suchka: Sobaka
   public onInitialize(engine: ex.Engine) { }
   public onActivate() {
-    const offsetx = this.engine.getWorldBounds().right / 2 + 24 - mapA[0].length / 2 * 48
-    this.setPlayers(offsetx, 6, 4, 1, 5)
+    const offsetx = Math.round(this.engine.getWorldBounds().right / 2 + 24 - mapA[0].length / 2 * 48)
+    const offsety = Math.round(this.engine.getWorldBounds().bottom / 2 + 24 - mapA.length / 2 * 48)
+    this.setPlayers(offsetx, offsety, 6, 4, 1, 5)
     this.game.controlsActive = true
     //this.zhuchka.setPos(offsetx, 5, 1, new Vector(10, 2))
     //this.suchka.setPos(offsetx, 1, 5, new Vector(1, 10))
   }
   public onDeactivate() { this.game.controlsActive = false }
 
-  constructor(playerA: Player, playerB: Player, engine: Game, timer: ex.Label) {
-    const offsetx = engine.getWorldBounds().right / 2 + 24 - mapA[0].length / 2 * 48
-    const mapATiles = createWalls(offsetx, mapA, true)
-    const mapBTiles = createWalls(offsetx, mapB, false)
+  constructor(playerA: Player, playerB: Player, engine: Game, timer: ex.Label, deathNote: ex.Label) {
+    const offsetx = Math.round(engine.getWorldBounds().right / 2 + 24 - mapA[0].length / 2 * 48)
+    const offsety = Math.round(engine.getWorldBounds().bottom / 2 + 24 - mapA.length / 2 * 48)
+    const mapATiles = createWalls(offsetx, offsety, mapA, true)
+    const mapBTiles = createWalls(offsetx, offsety, mapB, false)
     const buttonsDoorsCoordsA = [
       {
         button: { x: 3, y: 7 },
@@ -121,6 +123,7 @@ export class LevelTwo extends Level {
 
     const buttonsDoorsA = buttonsDoorsCoordsA.map(buttonsDoorsCoord => createButtonDoors(
       offsetx,
+      offsety,
       buttonsDoorsCoord.button,
       buttonsDoorsCoord.doors[0],
       true, true))
@@ -129,6 +132,7 @@ export class LevelTwo extends Level {
 
     const buttonsDoorsB = buttonsDoorsCoordsB.map(buttonsDoorsCoord => createButtonDoors(
       offsetx,
+      offsety,
       buttonsDoorsCoord.button,
       buttonsDoorsCoord.doors[0],
       true, false))
@@ -136,7 +140,7 @@ export class LevelTwo extends Level {
     const doorsB = buttonsDoorsB.map(item => item.doors)
 
 
-    const finish = new Finish(offsetx, 1, 7, playerA, playerB)
+    const finish = new Finish(offsetx, offsety, 1, 7, playerA, playerB)
 
     // const zhuchka = new Sobaka(5, 1, true)
     // const suchka = new Sobaka(1, 5, false)
@@ -144,8 +148,8 @@ export class LevelTwo extends Level {
     // zhuchka.guljatj(new Vector(10, 2), 100)
     // suchka.guljatj(new Vector(2, 10), 100)
 
-    const objectsA = [timer, ...mapATiles, ...buttonsA, ...flatten(doorsB), /*zhuchka*/, finish]
-    const objectsB = [timer, ...mapBTiles, ...buttonsB, ...flatten(doorsA), /*suchka*/, finish]
+    const objectsA = [deathNote, timer, ...mapATiles, ...buttonsA, ...flatten(doorsB), /*zhuchka*/, finish]
+    const objectsB = [deathNote, timer, ...mapBTiles, ...buttonsB, ...flatten(doorsA), /*suchka*/, finish]
 
     super(playerA, playerB, objectsA, objectsB, engine)
 

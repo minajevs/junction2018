@@ -67,7 +67,8 @@ const mapA = [
     [mtb, ' ', met, ' ', met, ' ', mtr, mer, ' ', mtb],
     [mtr, mlr, mrb, ' ', mtb, ' ', med, ' ', ' ', mtb],
     [mtb, ' ', ' ', ' ', mtb, ' ', ' ', ' ', ' ', mtb],
-    [mlb, mlr, mlr, mlr, mtt, mlr, mlr, mlr, mlr, mrb]
+    [mlb, mlr, mlr, mlr, mtt, mlr, mlr, mlr, mlr, mrb],
+    []
 ]
 
 const mapB = [
@@ -79,7 +80,8 @@ const mapB = [
     [ctb, ' ', ctb, ' ', ' ', ' ', clt, clr, clr, ctl],
     [ctb, ' ', ced, ' ', cet, ' ', ced, ' ', ' ', ctb],
     [ctb, ' ', ' ', ' ', ctb, ' ', ' ', ' ', ' ', ctb],
-    [clb, clr, clr, clr, ctt, clr, clr, clr, clr, crb]
+    [clb, clr, clr, clr, ctt, clr, clr, clr, clr, crb],
+    []
 ]
 
 export class LevelOne extends Level {
@@ -87,22 +89,24 @@ export class LevelOne extends Level {
     suchka: Sobaka
     public onInitialize(engine: ex.Engine) { }
     public onActivate() {
-        const offsetx = this.engine.getWorldBounds().right / 2 + 24 - mapA[0].length / 2 * 48
-        this.setPlayers(offsetx, 1, 7, 8, 7)
+        const offsetx = Math.round(this.engine.getWorldBounds().right / 2 + 24 - mapA[0].length / 2 * 48)
+        const offsety = Math.round(this.engine.getWorldBounds().bottom / 2 + 24 - mapA.length / 2 * 48)
+        this.setPlayers(offsetx, offsety, 1, 7, 8, 7)
         this.game.controlsActive = true
     }
     public onDeactivate() { }
 
-    constructor(playerA: Player, playerB: Player, engine: Game, timer: ex.Label) {
-        const offsetx = engine.getWorldBounds().right / 2 + 24 - mapA[0].length / 2 * 48
-        const mapATiles = createWalls(offsetx, mapA, true)
-        const mapBTiles = createWalls(offsetx, mapB, false)
+    constructor(playerA: Player, playerB: Player, engine: Game, timer: ex.Label, deathNote: ex.Label) {
+        const offsetx = Math.round(engine.getWorldBounds().right / 2 + 24 - mapA[0].length / 2 * 48)
+        const offsety = Math.round(engine.getWorldBounds().bottom / 2 + 24 - mapA.length / 2 * 48)
+        const mapATiles = createWalls(offsetx, offsety, mapA, true)
+        const mapBTiles = createWalls(offsetx, offsety, mapB, false)
 
 
-        const finish = new Finish(offsetx, 5, 1, playerA, playerB)
+        const finish = new Finish(offsetx, offsety, 5, 1, playerA, playerB)
 
-        const objectsA = [timer, ...mapATiles, finish]
-        const objectsB = [timer, ...mapBTiles, finish]
+        const objectsA = [deathNote, timer, ...mapATiles, finish]
+        const objectsB = [deathNote, timer, ...mapBTiles, finish]
 
         super(playerA, playerB, objectsA, objectsB, engine)
 

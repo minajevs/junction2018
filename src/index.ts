@@ -9,6 +9,7 @@ import { Menu } from './scenes/menu';
 import { MagentaResources } from './magentaResources';
 import { CyanResources } from './cyanResources';
 import { ScoreTime, createTimer } from './actors/timer';
+import { DeathNote } from './actors/deathNote';
 
 export const globalEvents = new ex.EventDispatcher({})
 
@@ -36,6 +37,7 @@ export class Game extends ex.Engine {
 const game = new Game();
 let loader = new ex.Loader();
 const timer = new ScoreTime(game)
+const deathNote = new DeathNote(game)
 
 const playerA = new Player(1, 1, true);
 const playerB = new Player(1, 1, false);
@@ -44,9 +46,9 @@ const playerB = new Player(1, 1, false);
 const menu = new Menu(game)
 
 const levels = [
-  new LevelOne(playerA, playerB, game, timer),
-  new LevelTwo(playerA, playerB, game, timer),
-  new LevelThree(playerA, playerB, game, timer)
+  new LevelOne(playerA, playerB, game, timer, deathNote),
+  new LevelTwo(playerA, playerB, game, timer, deathNote),
+  new LevelThree(playerA, playerB, game, timer, deathNote)
 ]
 
 // vars
@@ -87,6 +89,8 @@ const onPressEvent = (event: ex.Input.KeyEvent) => {
     aActive = !aActive
     level.switchType(aActive)
   }
+  if (event.key === Keys.G)
+    globalEvents.emit('playerDeath')
 }
 
 game.input.keyboard.on('hold', onHoldEvent)

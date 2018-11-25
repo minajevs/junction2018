@@ -41,13 +41,13 @@ export class Level extends ex.Scene {
         this.add(createBg(engine))
     }
 
-    setPlayers = (startpos: number, xa: number, ya: number, xb: number, yb: number) => {
+    setPlayers = (startpos: number, startposy: number, xa: number, ya: number, xb: number, yb: number) => {
         this.add(this.playerA)
         this.add(this.playerB)
         this.playerA.cancelMove()
         this.playerB.cancelMove()
-        this.playerA.setPos(startpos, xa, ya)
-        this.playerB.setPos(startpos, xb, yb)
+        this.playerA.setPos(startpos, startposy, xa, ya)
+        this.playerB.setPos(startpos, startposy, xb, yb)
 
         this.on("changePlayer", _ => {
             this.aActive = !this.aActive
