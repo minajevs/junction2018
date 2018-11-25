@@ -44,13 +44,37 @@ export class Menu extends ex.Scene {
         copyright.color = ex.Color.fromHex('ED1B7B')
         copyright.textAlign = ex.TextAlign.Center
 
+        const bb = engine.getWorldBounds()
+        const scalex = bb.right / 1920
+        const scaley = bb.bottom / 1080
         const controls = new ex.Actor(
             engine.getWorldBounds().right / 2,
             engine.getWorldBounds().bottom / 2)
 
         const csprite = Resources.Controls.asSprite()
-        csprite.scale = new Vector(0.75, 0.75)
+        csprite.x = csprite.drawWidth / 2
+        csprite.y = csprite.drawHeight / 2
+
+        // csprite.scale = new ex.Vector(scalex > scaley ? scalex : scaley, scalex > scaley ? scalex : scaley)
+
+        controls.x = bb.right / 2
+        controls.y = bb.bottom / 2
+        controls.scale = new ex.Vector(scalex < scaley ? scalex : scaley, scalex < scaley ? scalex : scaley)
         controls.addDrawing(csprite)
+
+        /* 
+        const bb = engine.getWorldBounds()
+    const bgSprite = Resources.Bg.asSprite()
+    const scalex = bb.right / 1920
+    const scaley = bb.bottom / 1080
+    bgSprite.x = bgSprite.drawWidth / 2
+    bgSprite.y = bgSprite.drawHeight / 2
+    const bg = new ex.Actor()
+    bg.x = bb.right / 2
+    bg.y = bb.bottom / 2
+    bg.scale = new ex.Vector(scalex > scaley ? scalex : scaley, scalex > scaley ? scalex : scaley)
+    bg.addDrawing(bgSprite)
+        */
 
         this.add(createBg(engine))
         this.add(label)
