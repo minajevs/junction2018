@@ -10,6 +10,7 @@ import { MagentaResources } from './magentaResources';
 import { CyanResources } from './cyanResources';
 import { ScoreTime, createTimer } from './actors/timer';
 import { DeathNote } from './actors/deathNote';
+import { DeathEvent } from './actors/sobaka/sobaka';
 
 export const globalEvents = new ex.EventDispatcher({})
 
@@ -89,8 +90,10 @@ const onPressEvent = (event: ex.Input.KeyEvent) => {
     aActive = !aActive
     level.switchType(aActive)
   }
-  if (event.key === Keys.G)
-    globalEvents.emit('playerDeath')
+  if (event.key === Keys.G) {
+    const { x, y } = aActive ? playerA : playerB
+    globalEvents.emit('playerDeath', new DeathEvent(x, y, aActive ? true : false))
+  }
 }
 
 game.input.keyboard.on('hold', onHoldEvent)
@@ -123,11 +126,12 @@ globalEvents.on('finishLevel', _ => {
   playerB.toggle(!aActive)
 })
 
-globalEvents.on('playerDeath', _ => {
+globalEvents.on('playerDeath', (event: DeathEvent) => {
   // leveli++
   // level = levels[leveli]
   game.goToScene(`level${leveli}`)
   level.onActivate()
+  level.showDeathParticle(event.x, event.y, event.isA)
   aActive = true
   level.switchType(aActive)
   playerA.toggle(aActive)
