@@ -10,12 +10,14 @@ import { MagentaResources } from './magentaResources';
 import { CyanResources } from './cyanResources';
 import { ScoreTime, createTimer } from './actors/timer';
 import { DeathNote } from './actors/deathNote';
+import { WinScreen } from './scenes/winScreen';
+import { DeathEvent } from './actors/sobaka/sobaka';
 
 export const globalEvents = new ex.EventDispatcher({})
 
 export class Game extends ex.Engine {
   controlsActive: boolean = false
-
+  finishControls: boolean = false
   constructor() {
     super({
       width: 800,
@@ -48,7 +50,8 @@ const menu = new Menu(game)
 const levels = [
   new LevelOne(playerA, playerB, game, timer, deathNote),
   new LevelTwo(playerA, playerB, game, timer, deathNote),
-  new LevelThree(playerA, playerB, game, timer, deathNote)
+  new LevelThree(playerA, playerB, game, timer, deathNote),
+  new WinScreen(game, timer)
 ]
 
 // vars
@@ -83,14 +86,39 @@ const onHoldEvent = (event: ex.Input.KeyEvent) => {
 }
 
 const onPressEvent = (event: ex.Input.KeyEvent) => {
+  if (game.finishControls) {
+    if (event.key === Keys.Space) {
+      aActive = !aActive
+      level.switchType(aActive)
+    }
+  }
+
   if (!game.controlsActive) return
+
+  if (game.finishControls && game.controlsActive) {
+    game.finishControls = false
+    leveli = 0
+    level = levels[leveli]
+    game.input.pointers.primary.on("down", () => {
+      // Mouse click
+      game.input.pointers.primary.off("down");
+      //timer.setTime(0)
+      timer.setTime(0)
+      game.goToScene('level0');
+    });
+    game.goToScene('menu')
+  }
 
   if (event.key === Keys.Space) {
     aActive = !aActive
     level.switchType(aActive)
   }
+  const { x, y } = aActive ? playerA : playerB
   if (event.key === Keys.G)
-    globalEvents.emit('playerDeath')
+    globalEvents.emit('playerDeath', new DeathEvent(x, y, aActive ? true : false))
+
+  if (event.key === Keys.T)
+    globalEvents.emit('finishLevel')
 }
 
 game.input.keyboard.on('hold', onHoldEvent)
@@ -123,11 +151,12 @@ globalEvents.on('finishLevel', _ => {
   playerB.toggle(!aActive)
 })
 
-globalEvents.on('playerDeath', _ => {
+globalEvents.on('playerDeath', (event: DeathEvent) => {
   // leveli++
   // level = levels[leveli]
   game.goToScene(`level${leveli}`)
   level.onActivate()
+  level.showDeathParticle(event.x, event.y, event.isA)
   aActive = true
   level.switchType(aActive)
   playerA.toggle(aActive)

@@ -6,6 +6,7 @@ import { createBg } from './createbg';
 import { globalEvents, Game } from '..';
 import { Sobaka } from '../actors/sobaka/sobaka';
 import { ScoreTime } from '../actors/timer';
+import { death as deathParticle } from "../particles"
 
 export class ChangeTypeEvent extends ex.GameEvent<boolean>{
     data: boolean
@@ -18,8 +19,26 @@ export class ChangeTypeEvent extends ex.GameEvent<boolean>{
 export class Level extends ex.Scene {
     public onInitialize(engine: ex.Engine) {
     }
-    public onActivate() { }
+    public onActivate() {
+    }
     public onDeactivate() { }
+
+    public showDeathParticle(x: number, y: number, isA: boolean) {
+        // console.log(x, y, isA)
+        deathParticle.x = x
+        deathParticle.y = y
+        if (!isA) {
+            deathParticle.beginColor = ex.Color.fromHex('00EAFF');
+            deathParticle.endColor = ex.Color.fromHex('ED1B7B');
+        } else {
+            deathParticle.beginColor = ex.Color.fromHex('ED1B7B');
+            deathParticle.endColor = ex.Color.fromHex('00EAFF');
+        }
+        deathParticle.isEmitting  = true
+        setTimeout(() => {
+            deathParticle.isEmitting  = false
+        }, 150)
+      }
 
     private aActive = true
 
@@ -40,6 +59,7 @@ export class Level extends ex.Scene {
         this.objectA = objectsA
         this.objectB = objectsB
         this.add(createBg(engine))
+        this.add(deathParticle)
     }
 
     setPlayers = (startpos: number, startposy: number, xa: number, ya: number, xb: number, yb: number) => {

@@ -14,7 +14,7 @@ import { background } from "../particles"
 import { Sobaka } from '../actors/sobaka/sobaka';
 import { Vector } from 'excalibur';
 import { ScoreTime } from '../actors/timer';
-import { Game } from '..';
+import { Game, globalEvents } from '..';
 
 const {
   leftTop: mlt,
@@ -212,6 +212,7 @@ export class LevelThree extends Level {
     this.dog3 = dog3
     this.dog4 = dog4
     this.dog5 = dog5
+
     // this.suchka = suchka
     //this.setPlayers(offsetx, 1, 1, 4, 4)
   }

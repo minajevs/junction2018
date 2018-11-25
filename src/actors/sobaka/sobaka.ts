@@ -10,8 +10,22 @@ import { player1particle, player2particle } from "../../particles"
 import { Player } from '../player/player';
 import { ChangeTypeEvent } from '../../scenes/level';
 import { Button } from '../button/button';
+import { GameEvent } from 'excalibur';
 
 const TILE = 48
+
+export class DeathEvent extends GameEvent<any> {
+    x: number
+    y: number
+    isA: boolean
+    constructor(x: number, y: number, isA: boolean) {
+        super()
+
+        this.x = x
+        this.y = y
+        this.isA = isA
+    }
+}
 
 export class Sobaka extends ex.Actor {
     private next: { x: number, y: number }
@@ -49,7 +63,7 @@ export class Sobaka extends ex.Actor {
             if (ev.other instanceof Button) return
 
             if (ev.other instanceof Player && ev.other.isA === isA)
-                globalEvents.emit('playerDeath')
+                globalEvents.emit('playerDeath', new DeathEvent(ev.other.x, ev.other.y, isA))
         });
 
         globalEvents.on('switchType', event => {
