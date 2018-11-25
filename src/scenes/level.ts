@@ -20,8 +20,6 @@ export class Level extends ex.Scene {
     public onInitialize(engine: ex.Engine) {
     }
     public onActivate() {
-        this.playerA.opacity = 0
-        this.playerA.actions.fade(1, 250)
     }
     public onDeactivate() { }
 
@@ -47,10 +45,11 @@ export class Level extends ex.Scene {
     playerA: Player
     playerB: Player
     game: Game
+    levelShown: boolean;
 
     private objectA: ex.Actor[]
     private objectB: ex.Actor[]
-
+    
     constructor(playerA: Player, playerB: Player, objectsA: ex.Actor[], objectsB: ex.Actor[], engine: Game) {
         super()
         this.engine = engine
@@ -106,5 +105,27 @@ export class Level extends ex.Scene {
             //this.add(this.playerB)
             this.objectB.forEach(x => this.add(x))
         }
+    }
+
+    showLevelNumber = (num: number) => {
+        if (this.levelShown) return;
+        const label = new ex.Label(
+            `Level ${num}`,
+            this.engine.getWorldBounds().right / 2,
+            this.engine.getWorldBounds().top + 50
+        )
+        
+        label.opacity = 0;
+        label.fontFamily = "'Press Start 2P'"
+        label.fontSize = 30
+        label.color = ex.Color.Yellow
+        label.textAlign = ex.TextAlign.Center
+
+        this.add(label)
+        label.setZIndex(200);
+        label.actions
+            .fade(1, 3000)
+            .fade(0, 3000)
+        this.levelShown = true;
     }
 }
